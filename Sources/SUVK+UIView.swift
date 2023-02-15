@@ -109,8 +109,8 @@ extension UIView {
             let height = NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 0.0)
             width.accessibilityValue  = constraintKey
             height.accessibilityValue = constraintKey
-            width.priority  = .required
-            height.priority = .required
+            width.priority  = .medium
+            height.priority = .medium
             self.addConstraints([width, height])
             self.isHidden = true
             return self
