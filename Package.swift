@@ -23,7 +23,9 @@ let package = Package(
                     .product(name: "RxRelay", package: "RxSwift"),
                     .product(name: "RxCocoa", package: "RxSwift"),
                 ],
-                path: "Sources"),
+                path: "Sources",
+                exclude: ["Resources",
+                          "SampleApp.zip"]),
         .testTarget(name: "SwiftUIViewKitTests", dependencies: ["SwiftUIViewKit"]),
     ],
     swiftLanguageVersions: [
