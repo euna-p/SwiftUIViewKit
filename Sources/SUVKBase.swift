@@ -16,7 +16,7 @@ public protocol UIViewKitAbstract: AnyObject {
 open class UIViewKitClass: UIView {
     private let runOnOnceForFirstLayout = RunOnOnce()
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         
         self.runOnOnceForFirstLayout.run {
@@ -24,14 +24,14 @@ open class UIViewKitClass: UIView {
         }
     }
     
-    public func clearContent() {
+    open func clearContent() {
         self.subviews.forEach {
             $0.removeFromSuperview()
             $0.didMoveToSuperview()
         }
     }
     
-    public func setContent() {
+    open func setContent() {
         self.clearContent()
         if let body = (self as? UIViewKitAbstract)?.body {
             body.build(to: self)
