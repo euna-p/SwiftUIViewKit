@@ -14,7 +14,7 @@ import RxCocoa
 extension UIView {
     @discardableResult
     public func subscribe<V: UIView, T>(_ observer: Observable<T>,
-                                 at when: SwiftUIViewKit.SubscribeAt = .always,
+                                 at when: SwiftUIView.SubscribeAt = .always,
                                  by disposeBag: DisposeBag,
                                  onNext: @escaping (V, T)->Void,
                                  file: String = #file, function: String = #function, lineNumber: Int = #line)
@@ -99,7 +99,7 @@ import RxRelay
 extension UIView {
     @discardableResult
     public func subscribe<V: UIView, T>(_ observer: BehaviorRelay<T>,
-                                 at when: SwiftUIViewKit.SubscribeAt = .always,
+                                 at when: SwiftUIView.SubscribeAt = .always,
                                  by disposeBag: DisposeBag,
                                  onNext: @escaping (V, T)->Void)
     -> Self {

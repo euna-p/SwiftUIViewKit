@@ -9,7 +9,6 @@ let package = Package(
     ],
     products: [
         .library(name: "SwiftUIViewKit", targets: ["SwiftUIViewKit"]),
-        .library(name: "SwiftUIViewKit", type: .dynamic, targets: ["SwiftUIViewKit"]),
     ],
     dependencies: [
         .package(url: "https://github.com/SnapKit/SnapKit.git", from: "5.6.0"),
@@ -23,9 +22,7 @@ let package = Package(
                     .product(name: "RxRelay", package: "RxSwift"),
                     .product(name: "RxCocoa", package: "RxSwift"),
                 ],
-                path: "Sources",
-                exclude: ["Resources",
-                          "SampleApp.zip"]),
+                path: "Sources"),
         .testTarget(name: "SwiftUIViewKitTests", dependencies: ["SwiftUIViewKit"]),
     ],
     swiftLanguageVersions: [
