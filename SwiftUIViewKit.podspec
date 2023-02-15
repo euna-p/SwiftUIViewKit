@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name          = "SwiftUIViewKit"
-  s.version       = "1.0.2"
+  s.version       = "1.0.3"
   s.summary       = "Can more EASILY made UI."
   s.swift_version = "5.0"
 
@@ -138,5 +138,5 @@ Make some UIView like SwiftUI.
   s.dependency "SnapKit"
   s.dependency "RxSwift"
   s.dependency "RxCocoa"
-
+  s.dependency "RxGesture"
 end
