@@ -7,7 +7,7 @@
 
 import UIKit
 
-public typealias SwiftUIViewKit = UIViewKitAbstract & UIViewKitClass
+public typealias SwiftUIView = UIViewKitAbstract & UIViewKitClass
 
 public protocol UIViewKitAbstract: AnyObject {
     var body: UIView { get }
