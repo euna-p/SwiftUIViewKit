@@ -156,14 +156,30 @@ extension UIView {
 
 extension UIView {
     @discardableResult
+    public func onResize(to relay: PublishRelay<CGSize>, by disposeBag: DisposeBag) -> Self {
+        self.rx.observe(CGRect.self, #keyPath(UIView.bounds))
+            .map { $0?.size ?? .zero }
+            .bind(to: relay)
+            .disposed(by: disposeBag)
+        return self
+    }
+    
+    @discardableResult
+    public func onResize(to relay: BehaviorRelay<CGSize>, by disposeBag: DisposeBag) -> Self {
+        let publisher = PublishRelay<CGSize>()
+        publisher.bind(to: relay).disposed(by: disposeBag)
+        return self.onResize(to: publisher, by: disposeBag)
+    }
+    
+    @discardableResult
     public func onResize<T: UIView>(_ perform: @escaping (T, CGSize)->Void, by disposeBag: DisposeBag) -> Self {
         if let t = self as? T {
-            t.rx.observe(CGRect.self, #keyPath(UIView.bounds))
-                .subscribe(onNext: {
-                    guard let v = $0?.size else { return }
-                    perform(t, v)
-                })
+            let publisher = PublishRelay<CGSize>()
+            publisher
+                .map { (t, $0) }
+                .subscribe(onNext: perform)
                 .disposed(by: disposeBag)
+            return self.onResize(to: publisher, by: disposeBag)
         }
         return self
     }
