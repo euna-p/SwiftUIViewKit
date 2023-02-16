@@ -13,8 +13,12 @@ import RxRelay
 
 class MainView: SwiftUIView {
     private let disposeBag = DisposeBag()
+
     private let viewModel = BehaviorRelay<MainViewModel>(value: .init())
+
     private let currentText = BehaviorRelay<String>(value: "")
+
+    let didTappedNavigateToSecondView = PublishRelay<Void>()
 }
 
 //MARK: - SwiftUIViewKit
@@ -69,10 +73,16 @@ extension MainView {
                                 .onTapGesture(by: self.disposeBag) {[unowned self] in
                                     self.viewModel.unwrappedValue.clickedCount -= 1
                                 },
-                            UILabel(self.viewModel.map({ String(format: "%lld", $0.clickedCount) }), by: self.disposeBag)
+                            UILabel(self.viewModel
+                                        .map({ String(format: "%lld", $0.clickedCount) })
+                                        .distinctUntilChanged(),
+                                    by: self.disposeBag)
                                 .font(.systemFont(ofSize: 14.0, weight: .thin))
                                 .alignment(.center)
-                                .color(self.viewModel.map({ $0.clickedCount < 0 ? .red : .green }), by: self.disposeBag),
+                                .color(self.viewModel
+                                           .map({ $0.clickedCount < 0 ? .red : .green })
+                                           .distinctUntilChanged(),
+                                       by: self.disposeBag),
                             self.button(text: "+")
                                 .onTapGesture(by: self.disposeBag) {[unowned self] in
                                     self.viewModel.unwrappedValue.clickedCount += 1
@@ -84,6 +94,9 @@ extension MainView {
                     )
                     .spacing(8.0)
                     .alignment(.center),
+                    Divider(),
+                    self.button(text: "Move to SecondView!")
+                        .onTapGesture(by: self.disposeBag, publish: self.didTappedNavigateToSecondView),
                     Divider()
                 )
                 .spacing(16.0)
@@ -110,6 +123,7 @@ extension MainView {
 
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
+@available(iOS 13.0, *)
 struct MainView_Preview: PreviewProvider {
     static var previews: some View {
         MainView.view

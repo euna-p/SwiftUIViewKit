@@ -12,6 +12,10 @@
 		5D018E642995CE7300EC7C0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D018E632995CE7300EC7C0B /* Assets.xcassets */; };
 		5D018E702995CF9E00EC7C0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D018E6E2995CF9D00EC7C0B /* LaunchScreen.storyboard */; };
 		5D066DEA299CBE09005A7B90 /* SwiftUIViewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5D066DE9299CBE09005A7B90 /* SwiftUIViewKit */; };
+		5D066DF0299E2D7F005A7B90 /* UITableViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D066DEF299E2D7F005A7B90 /* UITableViewExtensions.swift */; };
+		5D066DF3299E2F06005A7B90 /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D066DF2299E2F06005A7B90 /* SecondView.swift */; };
+		5D066DF5299E2FFC005A7B90 /* SecondViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D066DF4299E2FFC005A7B90 /* SecondViewModel.swift */; };
+		5D066DF7299E32A3005A7B90 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D066DF6299E32A3005A7B90 /* SecondViewController.swift */; };
 		5D8F8027299635EB00745DFA /* SwiftUIViewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5D8F8026299635EB00745DFA /* SwiftUIViewKit */; };
 		5DA996AA2995D4B7008CF125 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA996A92995D4B7008CF125 /* MainView.swift */; };
 		5DFA66422996145300A07A25 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 5DFA66412996145300A07A25 /* RxCocoa */; };
@@ -42,6 +46,10 @@
 		5D018E632995CE7300EC7C0B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5D018E682995CE7300EC7C0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5D018E6F2995CF9D00EC7C0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5D066DEF299E2D7F005A7B90 /* UITableViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtensions.swift; sourceTree = "<group>"; };
+		5D066DF2299E2F06005A7B90 /* SecondView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
+		5D066DF4299E2FFC005A7B90 /* SecondViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewModel.swift; sourceTree = "<group>"; };
+		5D066DF6299E32A3005A7B90 /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		5DA996A92995D4B7008CF125 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		5DFA664C299628EC00A07A25 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		5DFA664E29962C1900A07A25 /* RxSwiftExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxSwiftExtensions.swift; sourceTree = "<group>"; };
@@ -88,6 +96,7 @@
 				5D018E5A2995CE7100EC7C0B /* AppDelegate.swift */,
 				5D018E742995D21C00EC7C0B /* Utilities */,
 				5DA996A82995D49F008CF125 /* Main */,
+				5D066DF1299E2EEA005A7B90 /* Second */,
 				5D018E632995CE7300EC7C0B /* Assets.xcassets */,
 				5D018E682995CE7300EC7C0B /* Info.plist */,
 			);
@@ -98,8 +107,19 @@
 			isa = PBXGroup;
 			children = (
 				5DFA664E29962C1900A07A25 /* RxSwiftExtensions.swift */,
+				5D066DEF299E2D7F005A7B90 /* UITableViewExtensions.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		5D066DF1299E2EEA005A7B90 /* Second */ = {
+			isa = PBXGroup;
+			children = (
+				5D066DF2299E2F06005A7B90 /* SecondView.swift */,
+				5D066DF4299E2FFC005A7B90 /* SecondViewModel.swift */,
+				5D066DF6299E32A3005A7B90 /* SecondViewController.swift */,
+			);
+			path = Second;
 			sourceTree = "<group>";
 		};
 		5D6666552995E98F00185AFD /* Frameworks */ = {
@@ -206,6 +226,10 @@
 				5D018E5F2995CE7100EC7C0B /* MainViewController.swift in Sources */,
 				5DA996AA2995D4B7008CF125 /* MainView.swift in Sources */,
 				5DFA664F29962C1900A07A25 /* RxSwiftExtensions.swift in Sources */,
+				5D066DF7299E32A3005A7B90 /* SecondViewController.swift in Sources */,
+				5D066DF0299E2D7F005A7B90 /* UITableViewExtensions.swift in Sources */,
+				5D066DF3299E2F06005A7B90 /* SecondView.swift in Sources */,
+				5D066DF5299E2FFC005A7B90 /* SecondViewModel.swift in Sources */,
 				5D018E5B2995CE7100EC7C0B /* AppDelegate.swift in Sources */,
 				5DFA664D299628EC00A07A25 /* MainViewModel.swift in Sources */,
 			);

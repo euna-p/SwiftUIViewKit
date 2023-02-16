@@ -16,3 +16,9 @@ extension BehaviorRelay {
         set { self.accept(newValue) }
     }
 }
+
+extension PublishRelay where Element == Void {
+    public func accept() {
+        self.accept(())
+    }
+}
