@@ -24,23 +24,23 @@ class MainView: SwiftUIView {
 //MARK: - SwiftUIViewKit
 extension MainView {
     var body: UIView {
-        UIStackView.vstack(
-            UIImageView(named: "11213734")
-                .contentMode(.scaleAspectFit)
-                .priority(.required),
-            UILabel(
-                UILabel("Awesome!\n")
-                    .font(.systemFont(ofSize: 20.0, weight: .bold))
-                    .lineHeight(26.0)
-                + UILabel("It's a Label...")
-                    .font(.systemFont(ofSize: 14.0, weight: .thin))
-                    .lineHeight(20.0)
-            )
-            .alignment(.center)
-            .lineLimit(0)
-            .color(.darkGray),
-            DottedDivider(),
-            UIScrollView.vscroll(
+        UIScrollView.vscroll(
+            UIStackView.vstack(
+                UIImageView(named: "11213734")
+                    .contentMode(.scaleAspectFit)
+                    .priority(.required),
+                UILabel(
+                    UILabel("Awesome!\n")
+                        .font(.systemFont(ofSize: 20.0, weight: .bold))
+                        .lineHeight(26.0)
+                    + UILabel("It's a Label...")
+                        .font(.systemFont(ofSize: 14.0, weight: .thin))
+                        .lineHeight(20.0)
+                )
+                .alignment(.center)
+                .lineLimit(0)
+                .color(.darkGray),
+                DottedDivider(),
                 UIStackView.vstack(
                     UILabel(self.viewModel.map({ $0.userText }), by: self.disposeBag)
                         .font(.systemFont(ofSize: 14.0, weight: .thin))
@@ -96,16 +96,15 @@ extension MainView {
                     .alignment(.center),
                     Divider(),
                     self.button(text: "Move to SecondView!")
-                        .onTapGesture(by: self.disposeBag, publish: self.didTappedNavigateToSecondView),
-                    Divider()
+                        .onTapGesture(by: self.disposeBag, publish: self.didTappedNavigateToSecondView)
                 )
                 .spacing(16.0)
             )
+            .spacing(26.0)
+            .padding(.top, 20.0)
+            .padding(.horizontal, 16.0)
+            .padding(.bottom, 12.0)
         )
-        .spacing(26.0)
-        .padding(.top, 20.0)
-        .padding(.horizontal, 16.0)
-        .padding(.bottom, 12.0)
     }
     
     private func button(text: String) -> UIView {

@@ -22,3 +22,9 @@ extension PublishRelay where Element == Void {
         self.accept(())
     }
 }
+
+extension Observable {
+    public var asOptional: Observable<Optional<Element>> {
+        return self.map({ $0 })
+    }
+}

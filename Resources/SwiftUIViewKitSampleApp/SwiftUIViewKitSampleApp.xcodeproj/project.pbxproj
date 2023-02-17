@@ -16,6 +16,9 @@
 		5D066DF3299E2F06005A7B90 /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D066DF2299E2F06005A7B90 /* SecondView.swift */; };
 		5D066DF5299E2FFC005A7B90 /* SecondViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D066DF4299E2FFC005A7B90 /* SecondViewModel.swift */; };
 		5D066DF7299E32A3005A7B90 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D066DF6299E32A3005A7B90 /* SecondViewController.swift */; };
+		5D066DF9299F17D7005A7B90 /* RxKeyboardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D066DF8299F17D7005A7B90 /* RxKeyboardResponder.swift */; };
+		5D066DFB299F1A46005A7B90 /* UIEdgeInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D066DFA299F1A46005A7B90 /* UIEdgeInsets.swift */; };
+		5D066DFD299F1B6F005A7B90 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D066DFC299F1B6F005A7B90 /* UIApplication.swift */; };
 		5D8F8027299635EB00745DFA /* SwiftUIViewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5D8F8026299635EB00745DFA /* SwiftUIViewKit */; };
 		5DA996AA2995D4B7008CF125 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA996A92995D4B7008CF125 /* MainView.swift */; };
 		5DFA66422996145300A07A25 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 5DFA66412996145300A07A25 /* RxCocoa */; };
@@ -50,6 +53,9 @@
 		5D066DF2299E2F06005A7B90 /* SecondView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
 		5D066DF4299E2FFC005A7B90 /* SecondViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewModel.swift; sourceTree = "<group>"; };
 		5D066DF6299E32A3005A7B90 /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		5D066DF8299F17D7005A7B90 /* RxKeyboardResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxKeyboardResponder.swift; sourceTree = "<group>"; };
+		5D066DFA299F1A46005A7B90 /* UIEdgeInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIEdgeInsets.swift; sourceTree = "<group>"; };
+		5D066DFC299F1B6F005A7B90 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		5DA996A92995D4B7008CF125 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		5DFA664C299628EC00A07A25 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		5DFA664E29962C1900A07A25 /* RxSwiftExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxSwiftExtensions.swift; sourceTree = "<group>"; };
@@ -106,8 +112,11 @@
 		5D018E742995D21C00EC7C0B /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				5DFA664E29962C1900A07A25 /* RxSwiftExtensions.swift */,
+				5D066DFC299F1B6F005A7B90 /* UIApplication.swift */,
+				5D066DFA299F1A46005A7B90 /* UIEdgeInsets.swift */,
 				5D066DEF299E2D7F005A7B90 /* UITableViewExtensions.swift */,
+				5DFA664E29962C1900A07A25 /* RxSwiftExtensions.swift */,
+				5D066DF8299F17D7005A7B90 /* RxKeyboardResponder.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -223,6 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D066DFD299F1B6F005A7B90 /* UIApplication.swift in Sources */,
 				5D018E5F2995CE7100EC7C0B /* MainViewController.swift in Sources */,
 				5DA996AA2995D4B7008CF125 /* MainView.swift in Sources */,
 				5DFA664F29962C1900A07A25 /* RxSwiftExtensions.swift in Sources */,
@@ -232,6 +242,8 @@
 				5D066DF5299E2FFC005A7B90 /* SecondViewModel.swift in Sources */,
 				5D018E5B2995CE7100EC7C0B /* AppDelegate.swift in Sources */,
 				5DFA664D299628EC00A07A25 /* MainViewModel.swift in Sources */,
+				5D066DFB299F1A46005A7B90 /* UIEdgeInsets.swift in Sources */,
+				5D066DF9299F17D7005A7B90 /* RxKeyboardResponder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
