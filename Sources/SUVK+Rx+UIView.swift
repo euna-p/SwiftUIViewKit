@@ -93,6 +93,29 @@ extension UIView {
     }
 }
 
+extension UIView {
+    @discardableResult
+    public func onResize<T: UIView>(_ perform: @escaping (T, CGSize)->Void, by disposeBag: DisposeBag) -> Self {
+        if let t = self as? T {
+            self.rx.observe(CGRect.self, #keyPath(UIView.bounds))
+                .map { (t, $0?.size ?? .zero) }
+                .bind(onNext: perform)
+                .disposed(by: disposeBag)
+        }
+        return self
+    }
+}
+
+extension UIControl {
+    @discardableResult
+    func addTarget(by disposeBag: DisposeBag, for controlEvents: UIControl.Event, action: @escaping (()->Void)) -> Self {
+        self.rx.controlEvent(controlEvents)
+            .subscribe(onNext: action)
+            .disposed(by: disposeBag)
+        return self
+    }
+}
+
 #if canImport(RxRelay)
 import RxRelay
 
@@ -197,34 +220,20 @@ extension UIView {
 extension UIView {
     @discardableResult
     public func onResize(to relay: PublishRelay<CGSize>, by disposeBag: DisposeBag) -> Self {
-        self.rx.observe(CGRect.self, #keyPath(UIView.bounds))
-            .map { $0?.size ?? .zero }
-            .bind(to: relay)
-            .disposed(by: disposeBag)
-        return self
+        self.onResize({ relay.accept($1) }, by: disposeBag)
     }
-    
     @discardableResult
     public func onResize(to relay: BehaviorRelay<CGSize>, by disposeBag: DisposeBag) -> Self {
-        let publisher = PublishRelay<CGSize>()
-        publisher.bind(to: relay).disposed(by: disposeBag)
-        return self.onResize(to: publisher, by: disposeBag)
-    }
-    
-    @discardableResult
-    public func onResize<T: UIView>(_ perform: @escaping (T, CGSize)->Void, by disposeBag: DisposeBag) -> Self {
-        if let t = self as? T {
-            let publisher = PublishRelay<CGSize>()
-            publisher
-                .map { (t, $0) }
-                .subscribe(onNext: perform)
-                .disposed(by: disposeBag)
-            return self.onResize(to: publisher, by: disposeBag)
-        }
-        return self
+        self.onResize({ relay.accept($1) }, by: disposeBag)
     }
 }
 
+extension UIControl {
+    @discardableResult
+    func addTarget(to relay: PublishRelay<Void>, by disposeBag: DisposeBag, for controlEvents: UIControl.Event) -> Self {
+        self.addTarget(by: disposeBag, for: controlEvents, action: { relay.accept(()) })
+    }
+}
 #endif
 #endif
 
