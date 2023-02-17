@@ -108,7 +108,7 @@ extension UIView {
 
 extension UIControl {
     @discardableResult
-    func addTarget(by disposeBag: DisposeBag, for controlEvents: UIControl.Event, action: @escaping (()->Void)) -> Self {
+    public func addTarget(by disposeBag: DisposeBag, for controlEvents: UIControl.Event, action: @escaping (()->Void)) -> Self {
         self.rx.controlEvent(controlEvents)
             .subscribe(onNext: action)
             .disposed(by: disposeBag)
@@ -230,7 +230,7 @@ extension UIView {
 
 extension UIControl {
     @discardableResult
-    func addTarget(to relay: PublishRelay<Void>, by disposeBag: DisposeBag, for controlEvents: UIControl.Event) -> Self {
+    public func addTarget(to relay: PublishRelay<Void>, by disposeBag: DisposeBag, for controlEvents: UIControl.Event) -> Self {
         self.addTarget(by: disposeBag, for: controlEvents, action: { relay.accept(()) })
     }
 }
