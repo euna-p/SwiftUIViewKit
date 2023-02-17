@@ -1,3 +1,4 @@
+
 # SwiftUIViewKit
 
 Can more **EASILY** made UI.
@@ -22,9 +23,8 @@ class MyView: SwiftUIViewKit {
     }
 }
 ```
-By default, layouts can be configured with Vertical or Horizontal and Linear using *UIStackView*.
-
-
+> By default, layouts can be configured with Vertical or Horizontal and Linear using *UIStackView*.
+---
 ```
 UIStackView.vstack(
     /* ANYTHING */
@@ -33,17 +33,15 @@ UIStackView.vstack(
 .alignment(.center)
 .distribution(.fillEqually)
 ```
-At this time, you can obtain the layout you want by utilizing the *.spacing*, *.alignment*, and *.distribution* of *UIStrackView*.
-
-
+> At this time, you can obtain the layout you want by utilizing the *.spacing*, *.alignment*, and *.distribution* of *UIStrackView*.
+---
 ```
 UIView.spacer()
     .frame(maxWidth: .greatestFiniteMagnitude, horizontalAlignment: .right)
     .padding(.top, 12.0)
 ```
-All UIViews (including inherited children) can be sized through *.frame*, or *.padding* allows you to specify margins.
-
-
+> All UIViews (including inherited children) can be sized through *.frame*, or *.padding* allows you to specify margins.
+---
 ```
 UIScrollView.vscroll(
     /*Any UIView*/
@@ -54,18 +52,16 @@ UIScrollView.hscroll(
     /*Any UIView*/
 )
 ```
-*UIScrollView* is also easy to use.
-
-
+> *UIScrollView* is also easy to use.
+---
 ```
 UILabel(
     UILabel("Big").font(.systemFont(ofSize: 20.0, weight: .regular))
     + UILabel("Small").font(.systemFont(ofSize: 10.0, weight: .regular))
 )
 ```
-The `+` operator in *UILabel* makes it easy to formatted text.
-
-
+> The `+` operator in *UILabel* makes it easy to formatted text.
+---
 ```
 UIStackView.vstack(
     UILabel("some text"),
@@ -73,9 +69,8 @@ UIStackView.vstack(
 )
 .color(.cyan)
 ```
-*.color* finds all the *UIView*s contained within, including the corresponding *UIView*, and applies the color value.
-
-
+> *.color* finds all the *UIView*s contained within, including the corresponding *UIView*, and applies the color value.
+---
 ```
 private let disposeBag = DisposeBag()
 private let text      = BehaviorRelay<String>(value: "Now loading...")
@@ -90,20 +85,19 @@ var body: UIView {
     .color(self.color, by: self.disposeBag)
 }
 ```
-Use Rx then You can easily made responsive UI.
-
-
+> Use Rx then You can easily made responsive UI.
+---
 ```
 someView.configure {view in
     /* blah */
 }
 ```
-Features not yet supported can be customized using the *.configure* in UIView.
-
-
+> Features not yet supported can be customized using the *.configure* in UIView.
+---
 ```
 someView.subscribe(someObservable, by: disposeBag) {view, element in
     /* blah */
 }
 ```
-Similarly, you can customize the behavior after receiving the *Observable*.
+> Similarly, you can customize the behavior after receiving the *Observable*.
+---
