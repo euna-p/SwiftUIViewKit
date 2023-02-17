@@ -152,7 +152,47 @@ extension UIView {
         return self.onTapGesture(count: count, finger: finger, by: disposeBag, publish: observer)
     }
 }
-#endif
+
+extension UIView {
+    @discardableResult
+    public func corner(radius: Observable<CGFloat>, by disposeBag: DisposeBag) -> Self {
+        radius.subscribe(onNext: {
+            self.layer.cornerRadius = $0
+            self.layer.masksToBounds = true
+        })
+        .disposed(by: disposeBag)
+        return self
+    }
+    @discardableResult
+    public func border(color: Observable<UIColor>, by disposeBag: DisposeBag) -> Self {
+        color.subscribe(onNext: {
+            self.layer.borderColor = $0.cgColor
+        })
+        .disposed(by: disposeBag)
+        return self
+    }
+    @discardableResult
+    public func border(width: Observable<CGFloat>, by disposeBag: DisposeBag) -> Self {
+        width.subscribe(onNext: {
+            self.layer.borderWidth = $0
+        })
+        .disposed(by: disposeBag)
+        return self
+    }
+    
+    @discardableResult
+    public func corner(radius: BehaviorRelay<CGFloat>, by disposeBag: DisposeBag) -> Self {
+        self.corner(radius: radius.asObservable(), by: disposeBag)
+    }
+    @discardableResult
+    public func border(color: BehaviorRelay<UIColor>, by disposeBag: DisposeBag) -> Self {
+        self.border(color: color.asObservable(), by: disposeBag)
+    }
+    @discardableResult
+    public func border(width: BehaviorRelay<CGFloat>, by disposeBag: DisposeBag) -> Self {
+        self.border(width: width.asObservable(), by: disposeBag)
+    }
+}
 
 extension UIView {
     @discardableResult
@@ -185,6 +225,7 @@ extension UIView {
     }
 }
 
+#endif
 #endif
 
 extension Equatable {
