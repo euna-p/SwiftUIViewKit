@@ -16,7 +16,8 @@ class SecondView: SwiftUIView {
     
     private let viewModel = BehaviorRelay<SecondViewModel>(value: .init())
     
-    private let selectedIdx = BehaviorRelay<Int?>(value: nil)
+    private let selectedIdx    = BehaviorRelay<Int?>(value: nil)
+    private let scrollPosition = BehaviorRelay<CGPoint>(value: .zero)
 }
 
 //MARK: - Make A View
@@ -31,23 +32,26 @@ extension SecondView {
         tableView.contentInset = UIEdgeInsets(top: 20.0, left: 0.00, bottom: 12.0, right: 0.0)
         tableView.tableHeaderView = self.mainTableHeaderView
         
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        
         self.viewModel
             .map { $0.list }
             .distinctUntilChanged()
-            .bind(to: tableView.rx.items) {(tableView: UITableView, index, element) in
-                let cell = UITableViewCell()
-                if #available(iOS 14.0, *) {
-                    var content = cell.defaultContentConfiguration()
-                    content.text = element
-                    cell.contentConfiguration = content
-                } else {
-                    cell.textLabel?.text = element
+            .bind(
+                to: tableView.rx.items(cellIdentifier: "cell"),
+                curriedArgument: {index, element, cell in
+                    if #available(iOS 14.0, *) {
+                        var content = cell.defaultContentConfiguration()
+                        content.text = element
+                        cell.contentConfiguration = content
+                    } else {
+                        cell.textLabel?.text = element
+                    }
+                    cell.selectionStyle = .none
                 }
-                cell.selectionStyle = .none
-                return cell
-            }
+            )
             .disposed(by: self.disposeBag)
-            
+        
         tableView.rx.itemSelected
             .map { $0.row }
             .bind(to: self.selectedIdx)
@@ -62,6 +66,11 @@ extension SecondView {
             })
             .disposed(by: self.disposeBag)
         
+        tableView.rx.didScroll
+            .map { tableView.contentOffset }
+            .bind(to: self.scrollPosition)
+            .disposed(by: self.disposeBag)
+        
         tableView.setContentOffset(CGPoint(x: 0.0, y: -tableView.contentInset.top), animated: false)
         
         return tableView
@@ -71,7 +80,14 @@ extension SecondView {
         UIStackView.vstack(
             UIImageView(named: "11213734")
                 .contentMode(.scaleAspectFit)
-                .priority(.required),
+                .onResize({
+                    $0.layer.cornerRadius  = $1.width / 2.0
+                    $0.layer.masksToBounds = true
+                    $0.layer.borderColor   = UIColor.magenta.cgColor
+                    $0.layer.borderWidth   = 3.0
+                }, by: self.disposeBag)
+                .priority(.required)
+                .frame(maxWidth: .greatestFiniteMagnitude),
             UILabel(
                 UILabel("Awesome!\n")
                     .font(.systemFont(ofSize: 20.0, weight: .bold))
@@ -95,7 +111,12 @@ extension SecondView {
             .font(.systemFont(ofSize: 14.0, weight: .regular))
             .alignment(.center)
             .lineHeight(20.0)
-            .hidden(self.selectedIdx.map({ $0 == nil }), by: self.disposeBag)
+            .hidden(self.selectedIdx.map({ $0 == nil }), by: self.disposeBag),
+            UILabel(self.scrollPosition.map({ String(format: "Scolled x=%.1f y=%.1f", $0.x, $0.y) }),
+                    by: self.disposeBag)
+                .font(.systemFont(ofSize: 12.0, weight: .thin))
+                .alignment(.center)
+                .lineHeight(14.0)
         )
         .spacing(8.0)
         .padding(.horizontal, 16.0)

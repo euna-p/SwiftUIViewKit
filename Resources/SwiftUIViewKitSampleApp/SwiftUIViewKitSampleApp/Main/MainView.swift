@@ -16,8 +16,10 @@ class MainView: SwiftUIView {
 
     private let viewModel = BehaviorRelay<MainViewModel>(value: .init())
 
-    private let currentText = BehaviorRelay<String>(value: "")
-
+    private let topIconSize        = BehaviorRelay<CGSize>(value: .zero)
+    private let isTextFieldFocused = BehaviorRelay<Bool>(value: false)
+    private let currentText        = BehaviorRelay<String>(value: "")
+    
     let didTappedNavigateToSecondView = PublishRelay<Void>()
 }
 
@@ -28,7 +30,12 @@ extension MainView {
             UIStackView.vstack(
                 UIImageView(named: "11213734")
                     .contentMode(.scaleAspectFit)
-                    .priority(.required),
+                    .onResize(to: self.topIconSize, by: self.disposeBag)
+                    .corner(radius: self.topIconSize.map({ $0.width / 2.0 }), by: self.disposeBag)
+                    .border(width: 3.0)
+                    .border(color: .magenta)
+                    .priority(.required)
+                    .frame(maxWidth: .greatestFiniteMagnitude),
                 UILabel(
                     UILabel("Awesome!\n")
                         .font(.systemFont(ofSize: 20.0, weight: .bold))
@@ -42,24 +49,62 @@ extension MainView {
                 .color(.darkGray),
                 DottedDivider(),
                 UIStackView.vstack(
-                    UILabel(self.viewModel.map({ $0.userText }), by: self.disposeBag)
+                    UIStackView.hstack(
+                        UIView()
+                            .background(.gray)
+                            .frame(width: 4.0),
+                        UILabel(
+                            self.viewModel
+                                .map { $0.userText }
+                                .map { $0.isEmpty ? "Nothing..." : $0 },
+                            by: self.disposeBag
+                        )
                         .font(.systemFont(ofSize: 14.0, weight: .thin))
                         .lineLimit(0)
                         .lineHeight(20.0)
-                        .color(.magenta),
+                        .color(self.viewModel.map({ $0.userText.isEmpty ? .gray : .magenta }), by: disposeBag)
+                    )
+                    .spacing(8.0),
+                    UILabel(self.currentText.map({ String(format: "Realtime Text = \"%@\"", $0) }), by: self.disposeBag)
+                    .font(.systemFont(ofSize: 12.0, weight: .thin))
+                    .lineLimit(0)
+                    .lineHeight(14.0)
+                    .lineBreak(.byCharWrapping)
+                    .color(.gray),
                     UIStackView.hstack(
                         UITextField()
                             .bind(to: self.currentText, by: self.disposeBag)
                             .configuration {(tf: UITextField) in
                                 tf.placeholder = "Input some text and click button!"
                             }
-                            .padding(.all, 4.0)
-                            .border(width: 1.0)
-                            .border(color: .lightGray)
-                            .corner(radius: 6.0)
+                            .background(
+                                Divider()
+                                    .color(self.isTextFieldFocused.map({ $0 ? .cyan : .lightGray }),
+                                           by: self.disposeBag)
+                                    .frame(maxHeight: .greatestFiniteMagnitude,
+                                           verticalAlignment: .bottom)
+                            )
+                            .onTapGesture(by: self.disposeBag) {gesture in
+                                gesture.view?.becomeFirstResponder()
+                            }
+                            .addTarget(
+                                by: self.disposeBag,
+                                for: .editingDidBegin,
+                                action: {[unowned self] in
+                                    self.isTextFieldFocused.accept(true)
+                                }
+                            )
+                            .addTarget(
+                                by: self.disposeBag,
+                                for: [.editingDidEnd, .editingDidEndOnExit],
+                                action: {[unowned self] in
+                                    self.isTextFieldFocused.accept(false)
+                                }
+                            )
                             .priority(.defaultHigh),
                         self.button(text: "CLICK!")
                             .onTapGesture(by: self.disposeBag) {[unowned self] in
+                                self.endEditing(false)
                                 self.viewModel.unwrappedValue.userText = self.currentText.value
                             }
                     )
@@ -115,7 +160,7 @@ extension MainView {
             .priority(.required)
             .padding(.horizontal, 20.0)
             .padding(.vertical, 8.0)
-            .background(.darkGray)
+            .background(.lightGray)
             .corner(radius: 6.0)
     }
 }

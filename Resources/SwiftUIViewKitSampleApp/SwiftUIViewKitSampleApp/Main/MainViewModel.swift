@@ -8,6 +8,6 @@
 import Foundation
 
 struct MainViewModel {
-    var userText: String = "noting..."
+    var userText: String = ""
     var clickedCount: Int = 0
 }
