@@ -36,7 +36,7 @@ open class DottedDivider: UIView {
         let shapeLayer = CAShapeLayer()
         shapeLayer.strokeColor     = self.color.cgColor
         shapeLayer.lineWidth       = self.bounds.size.height
-        shapeLayer.lineDashPattern = [3.0, 2.0]
+        shapeLayer.lineDashPattern = [self.pattern.0, self.pattern.1]
 
         let path = CGMutablePath()
         path.addLines(between: [.zero, .init(x: self.bounds.size.width, y: 0.0)])
