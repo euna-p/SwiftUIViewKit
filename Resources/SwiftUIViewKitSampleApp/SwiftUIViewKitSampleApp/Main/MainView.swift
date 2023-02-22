@@ -47,7 +47,8 @@ extension MainView {
                 .alignment(.center)
                 .lineLimit(0)
                 .color(.darkGray),
-                DottedDivider(),
+                DottedDivider()
+                    .setPattern(line: 8.0, space: 2.0),
                 UIStackView.vstack(
                     UIStackView.hstack(
                         UIView()
