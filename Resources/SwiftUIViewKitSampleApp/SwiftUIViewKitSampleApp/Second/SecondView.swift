@@ -77,7 +77,7 @@ extension SecondView {
     }
     
     private var mainTableHeaderView: UIView {
-        UIStackView.vstack(
+        UIVStackView {
             UIImageView(named: "11213734")
                 .contentMode(.scaleAspectFit)
                 .onResize({
@@ -87,19 +87,19 @@ extension SecondView {
                     $0.layer.borderWidth   = 3.0
                 }, by: self.disposeBag)
                 .priority(.required)
-                .frame(maxWidth: .greatestFiniteMagnitude),
-            UILabel(
+                .frame(maxWidth: .greatestFiniteMagnitude)
+            UILabel {
                 UILabel("Awesome!\n")
                     .font(.systemFont(ofSize: 20.0, weight: .bold))
                     .lineHeight(26.0)
-                + UILabel("It's a TableHeaderView...")
+                UILabel("It's a TableHeaderView...")
                     .font(.systemFont(ofSize: 14.0, weight: .thin))
                     .lineHeight(20.0)
-            )
+            }
             .alignment(.center)
             .lineLimit(0)
-            .color(.darkGray),
-            DottedDivider(),
+            .color(.darkGray)
+            DottedDivider()
             UILabel(
                 Observable.combineLatest(
                     self.viewModel.map({ $0.list }),
@@ -111,13 +111,13 @@ extension SecondView {
             .font(.systemFont(ofSize: 14.0, weight: .regular))
             .alignment(.center)
             .lineHeight(20.0)
-            .hidden(self.selectedIdx.map({ $0 == nil }), by: self.disposeBag),
+            .hidden(self.selectedIdx.map({ $0 == nil }), by: self.disposeBag)
             UILabel(self.scrollPosition.map({ String(format: "Scolled x=%.1f y=%.1f", $0.x, $0.y) }),
                     by: self.disposeBag)
-                .font(.systemFont(ofSize: 12.0, weight: .thin))
-                .alignment(.center)
-                .lineHeight(14.0)
-        )
+            .font(.systemFont(ofSize: 12.0, weight: .thin))
+            .alignment(.center)
+            .lineHeight(14.0)
+        }
         .spacing(8.0)
         .padding(.horizontal, 16.0)
     }
