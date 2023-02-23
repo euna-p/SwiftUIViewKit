@@ -22,7 +22,7 @@ open class UIVStackView: UIStackView {
         }
     }
     
-    required public init(coder: NSCoder) {
+    public required init(coder: NSCoder) {
         super.init(coder: coder)
     }
 }
@@ -42,7 +42,7 @@ open class UIHStackView: UIStackView {
         }
     }
     
-    required public init(coder: NSCoder) {
+    public required init(coder: NSCoder) {
         super.init(coder: coder)
     }
 }
