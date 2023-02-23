@@ -8,7 +8,7 @@
 import UIKit
 
 @resultBuilder
-open class ViewGroup {
+public struct ViewGroup {
     
 }
 
@@ -22,20 +22,6 @@ extension ViewGroup {
     }
     
     public static func buildEither(second component: UIView) -> [UIView] {
-        return [component]
-    }
-}
-
-extension ViewGroup {
-    public static func buildBlock(_ components: UILabel...) -> [UILabel] {
-        return components
-    }
-    
-    public static func buildEither(first component: UILabel) -> [UILabel] {
-        return [component]
-    }
-    
-    public static func buildEither(second component: UILabel) -> [UILabel] {
         return [component]
     }
 }
