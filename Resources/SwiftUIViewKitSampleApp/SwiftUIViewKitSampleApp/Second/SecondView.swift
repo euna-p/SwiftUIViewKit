@@ -88,14 +88,14 @@ extension SecondView {
                 }, by: self.disposeBag)
                 .priority(.required)
                 .frame(maxWidth: .greatestFiniteMagnitude)
-            UILabel {
+            UILabel(
                 UILabel("Awesome!\n")
                     .font(.systemFont(ofSize: 20.0, weight: .bold))
                     .lineHeight(26.0)
-                UILabel("It's a TableHeaderView...")
+                + UILabel("It's a TableHeaderView...")
                     .font(.systemFont(ofSize: 14.0, weight: .thin))
                     .lineHeight(20.0)
-            }
+            )
             .alignment(.center)
             .lineLimit(0)
             .color(.darkGray)
