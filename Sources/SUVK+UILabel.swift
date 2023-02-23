@@ -64,6 +64,9 @@ extension UILabel {
     public convenience init(_ group: UILabel...) {
         self.init(group: group)
     }
+    public convenience init(@ViewGroup content: (()->[UILabel])) {
+        self.init(group: content())
+    }
     public convenience init(group: [UILabel]) {
         self.init(frame: .zero)
         

@@ -7,6 +7,46 @@
 
 import UIKit
 
+open class UIVStackView: UIStackView {
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.axis      = .vertical
+        self.spacing   = .zero
+        self.alignment = .fill
+    }
+    
+    public convenience init(@ViewGroup content: (()->[UIView])) {
+        self.init(frame: .zero)
+        content().forEach {
+            self.addArrangedSubview($0)
+        }
+    }
+    
+    required public init(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+}
+
+open class UIHStackView: UIStackView {
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.axis      = .horizontal
+        self.spacing   = .zero
+        self.alignment = .fill
+    }
+    
+    public convenience init(@ViewGroup content: (()->[UIView])) {
+        self.init(frame: .zero)
+        content().forEach {
+            self.addArrangedSubview($0)
+        }
+    }
+    
+    required public init(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+}
+
 extension UIStackView {
     public static func vstack() -> UIStackView {
         return Self.vstack(views: [])
@@ -15,10 +55,7 @@ extension UIStackView {
         return Self.vstack(views: views)
     }
     public static func vstack(views: [UIView]) -> UIStackView {
-        let vstack = UIStackView(frame: .zero)
-        vstack.axis      = .vertical
-        vstack.spacing   = .zero
-        vstack.alignment = .fill
+        let vstack = UIVStackView(frame: .zero)
         views.forEach {
             vstack.addArrangedSubview($0)
         }
@@ -31,11 +68,11 @@ extension UIStackView {
     public static func hstack(_ views: UIView...) -> UIStackView {
         return Self.hstack(views: views)
     }
+    public static func hstack(@ViewGroup content: (()->[UIView])) -> UIStackView {
+        return Self.hstack(views: content())
+    }
     public static func hstack(views: [UIView]) -> UIStackView {
-        let hstack = UIStackView(frame: .zero)
-        hstack.axis      = .horizontal
-        hstack.spacing   = .zero
-        hstack.alignment = .fill
+        let hstack = UIHStackView(frame: .zero)
         views.forEach {
             hstack.addArrangedSubview($0)
         }
