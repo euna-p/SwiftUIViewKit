@@ -11,12 +11,12 @@ open class UIVStackView: UIStackView {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         self.axis      = .vertical
-        self.spacing   = .zero
         self.alignment = .fill
     }
     
-    public convenience init(@ViewGroup content: (()->[UIView])) {
+    public convenience init(spacing: CGFloat = 0.0, @ViewGroup content: (()->[UIView])) {
         self.init(frame: .zero)
+        self.spacing = spacing
         content().forEach {
             self.addArrangedSubview($0)
         }
@@ -31,12 +31,12 @@ open class UIHStackView: UIStackView {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         self.axis      = .horizontal
-        self.spacing   = .zero
         self.alignment = .fill
     }
     
-    public convenience init(@ViewGroup content: (()->[UIView])) {
+    public convenience init(spacing: CGFloat = 0.0, @ViewGroup content: (()->[UIView])) {
         self.init(frame: .zero)
+        self.spacing = spacing
         content().forEach {
             self.addArrangedSubview($0)
         }
@@ -56,6 +56,7 @@ extension UIStackView {
     }
     public static func vstack(views: [UIView]) -> UIStackView {
         let vstack = UIVStackView(frame: .zero)
+        vstack.spacing = 0.0
         views.forEach {
             vstack.addArrangedSubview($0)
         }
@@ -73,6 +74,7 @@ extension UIStackView {
     }
     public static func hstack(views: [UIView]) -> UIStackView {
         let hstack = UIHStackView(frame: .zero)
+        hstack.spacing = 0.0
         views.forEach {
             hstack.addArrangedSubview($0)
         }
