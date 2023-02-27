@@ -18,10 +18,7 @@ class SecondView: SwiftUIView {
     
     private let selectedIdx    = BehaviorRelay<Int?>(value: nil)
     private let scrollPosition = BehaviorRelay<CGPoint>(value: .zero)
-}
-
-//MARK: - Make A View
-extension SecondView {
+    
     var body: UIView {
         self.mainTableView
     }

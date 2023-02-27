@@ -11,7 +11,6 @@
 		5D018E5F2995CE7100EC7C0B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D018E5E2995CE7100EC7C0B /* MainViewController.swift */; };
 		5D018E642995CE7300EC7C0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D018E632995CE7300EC7C0B /* Assets.xcassets */; };
 		5D018E702995CF9E00EC7C0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D018E6E2995CF9D00EC7C0B /* LaunchScreen.storyboard */; };
-		5D066DEA299CBE09005A7B90 /* SwiftUIViewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5D066DE9299CBE09005A7B90 /* SwiftUIViewKit */; };
 		5D066DF0299E2D7F005A7B90 /* UITableViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D066DEF299E2D7F005A7B90 /* UITableViewExtensions.swift */; };
 		5D066DF3299E2F06005A7B90 /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D066DF2299E2F06005A7B90 /* SecondView.swift */; };
 		5D066DF5299E2FFC005A7B90 /* SecondViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D066DF4299E2FFC005A7B90 /* SecondViewModel.swift */; };
@@ -19,12 +18,8 @@
 		5D066DF9299F17D7005A7B90 /* RxKeyboardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D066DF8299F17D7005A7B90 /* RxKeyboardResponder.swift */; };
 		5D066DFB299F1A46005A7B90 /* UIEdgeInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D066DFA299F1A46005A7B90 /* UIEdgeInsets.swift */; };
 		5D066DFD299F1B6F005A7B90 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D066DFC299F1B6F005A7B90 /* UIApplication.swift */; };
-		5D8F8027299635EB00745DFA /* SwiftUIViewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5D8F8026299635EB00745DFA /* SwiftUIViewKit */; };
+		5D1F0EB329AC725F0011F5DF /* SwiftUIViewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5D1F0EB229AC725F0011F5DF /* SwiftUIViewKit */; };
 		5DA996AA2995D4B7008CF125 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA996A92995D4B7008CF125 /* MainView.swift */; };
-		5DFA66422996145300A07A25 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 5DFA66412996145300A07A25 /* RxCocoa */; };
-		5DFA66442996145300A07A25 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 5DFA66432996145300A07A25 /* RxRelay */; };
-		5DFA66462996145300A07A25 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5DFA66452996145300A07A25 /* RxSwift */; };
-		5DFA664B29961AA800A07A25 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5DFA664A29961AA800A07A25 /* SnapKit */; };
 		5DFA664D299628EC00A07A25 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFA664C299628EC00A07A25 /* MainViewModel.swift */; };
 		5DFA664F29962C1900A07A25 /* RxSwiftExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFA664E29962C1900A07A25 /* RxSwiftExtensions.swift */; };
 /* End PBXBuildFile section */
@@ -56,6 +51,7 @@
 		5D066DF8299F17D7005A7B90 /* RxKeyboardResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxKeyboardResponder.swift; sourceTree = "<group>"; };
 		5D066DFA299F1A46005A7B90 /* UIEdgeInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIEdgeInsets.swift; sourceTree = "<group>"; };
 		5D066DFC299F1B6F005A7B90 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		5D1F0EA529AC55FC0011F5DF /* SwiftUIViewKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftUIViewKit; path = ../..; sourceTree = "<group>"; };
 		5DA996A92995D4B7008CF125 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		5DFA664C299628EC00A07A25 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		5DFA664E29962C1900A07A25 /* RxSwiftExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxSwiftExtensions.swift; sourceTree = "<group>"; };
@@ -66,12 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D8F8027299635EB00745DFA /* SwiftUIViewKit in Frameworks */,
-				5DFA66422996145300A07A25 /* RxCocoa in Frameworks */,
-				5D066DEA299CBE09005A7B90 /* SwiftUIViewKit in Frameworks */,
-				5DFA66462996145300A07A25 /* RxSwift in Frameworks */,
-				5DFA664B29961AA800A07A25 /* SnapKit in Frameworks */,
-				5DFA66442996145300A07A25 /* RxRelay in Frameworks */,
+				5D1F0EB329AC725F0011F5DF /* SwiftUIViewKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +72,7 @@
 		5D018E4E2995CE7100EC7C0B = {
 			isa = PBXGroup;
 			children = (
+				5D1F0EA529AC55FC0011F5DF /* SwiftUIViewKit */,
 				5D018E592995CE7100EC7C0B /* SwiftUIViewKitSampleApp */,
 				5D018E582995CE7100EC7C0B /* Products */,
 				5D6666552995E98F00185AFD /* Frameworks */,
@@ -166,12 +158,7 @@
 			);
 			name = SwiftUIViewKitSampleApp;
 			packageProductDependencies = (
-				5DFA66412996145300A07A25 /* RxCocoa */,
-				5DFA66432996145300A07A25 /* RxRelay */,
-				5DFA66452996145300A07A25 /* RxSwift */,
-				5DFA664A29961AA800A07A25 /* SnapKit */,
-				5D8F8026299635EB00745DFA /* SwiftUIViewKit */,
-				5D066DE9299CBE09005A7B90 /* SwiftUIViewKit */,
+				5D1F0EB229AC725F0011F5DF /* SwiftUIViewKit */,
 			);
 			productName = SwiftUIViewKitSampleApp;
 			productReference = 5D018E572995CE7100EC7C0B /* SwiftUIViewKitSampleApp.app */;
@@ -202,9 +189,7 @@
 			);
 			mainGroup = 5D018E4E2995CE7100EC7C0B;
 			packageReferences = (
-				5DFA663D2996144400A07A25 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				5DFA66402996145300A07A25 /* XCRemoteSwiftPackageReference "RxSwift" */,
-				5D066DE8299CBE09005A7B90 /* XCRemoteSwiftPackageReference "SwiftUIViewKit" */,
+				5D1F0EA729AC70DC0011F5DF /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = 5D018E582995CE7100EC7C0B /* Products */;
 			projectDirPath = "";
@@ -382,6 +367,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftUIViewKitSampleApp/Info.plist;
@@ -389,6 +375,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -413,6 +400,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftUIViewKitSampleApp/Info.plist;
@@ -420,6 +408,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -461,61 +450,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		5D066DE8299CBE09005A7B90 /* XCRemoteSwiftPackageReference "SwiftUIViewKit" */ = {
+		5D1F0EA729AC70DC0011F5DF /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/fallenlonelie/SwiftUIViewKit.git";
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
 			requirement = {
 				branch = main;
 				kind = branch;
 			};
 		};
-		5DFA663D2996144400A07A25 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
-		5DFA66402996145300A07A25 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5D066DE9299CBE09005A7B90 /* SwiftUIViewKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5D066DE8299CBE09005A7B90 /* XCRemoteSwiftPackageReference "SwiftUIViewKit" */;
-			productName = SwiftUIViewKit;
-		};
-		5D8F8026299635EB00745DFA /* SwiftUIViewKit */ = {
+		5D1F0EB229AC725F0011F5DF /* SwiftUIViewKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SwiftUIViewKit;
-		};
-		5DFA66412996145300A07A25 /* RxCocoa */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5DFA66402996145300A07A25 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxCocoa;
-		};
-		5DFA66432996145300A07A25 /* RxRelay */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5DFA66402996145300A07A25 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxRelay;
-		};
-		5DFA66452996145300A07A25 /* RxSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5DFA66402996145300A07A25 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxSwift;
-		};
-		5DFA664A29961AA800A07A25 /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5DFA663D2996144400A07A25 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

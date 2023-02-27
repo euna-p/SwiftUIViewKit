@@ -21,10 +21,7 @@ class MainView: SwiftUIView {
     private let currentText        = BehaviorRelay<String>(value: "")
     
     let didTappedNavigateToSecondView = PublishRelay<Void>()
-}
-
-//MARK: - SwiftUIViewKit
-extension MainView {
+    
     var body: UIView {
         UIVScrollView {
             UIVStackView(spacing: 26.0) {
@@ -37,6 +34,23 @@ extension MainView {
                     self.clickerSampleView
                     Divider(lineWeight: 1.0)
                     self.navigateToSecondViewButton
+                    //NOTE: - Use "for~in" and "if~else".
+                    Divider(lineWeight: 1.0).color(.red)
+                    UIHStackView {
+                        for i in 1...10 {
+                            if i == 1 || i == 10 {
+                                UILabel("\(i)")
+                                    .font(.systemFont(ofSize: 12.0, weight: .bold))
+                                    .color(.lightGray)
+                            } else {
+                                UILabel("\(i)")
+                                    .font(.systemFont(ofSize: 12.0, weight: .thin))
+                                    .color(.lightGray)
+                            }
+                        }
+                    }
+                    
+                    .distribution(.equalSpacing)
                 }
             }
             .padding(.top, 20.0)
