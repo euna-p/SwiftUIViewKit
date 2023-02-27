@@ -7,50 +7,6 @@
 
 import UIKit
 
-open class UIVStackView: UIStackView {
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.axis = .vertical
-    }
-    
-    public convenience init(alignment: UIStackView.Alignment = .fill,
-                            spacing: CGFloat = 0.0,
-                            @ViewGroup content: (()->[UIView])) {
-        self.init(frame: .zero)
-        self.spacing = spacing
-        self.alignment = alignment
-        content().forEach {
-            self.addArrangedSubview($0)
-        }
-    }
-    
-    public required init(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-}
-
-open class UIHStackView: UIStackView {
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.axis = .horizontal
-    }
-    
-    public convenience init(alignment: UIStackView.Alignment = .fill,
-                            spacing: CGFloat = 0.0,
-                            @ViewGroup content: (()->[UIView])) {
-        self.init(frame: .zero)
-        self.spacing = spacing
-        self.alignment = alignment
-        content().forEach {
-            self.addArrangedSubview($0)
-        }
-    }
-    
-    public required init(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-}
-
 extension UIStackView {
     public static func vstack() -> UIStackView {
         return Self.vstack(views: [])
@@ -59,7 +15,8 @@ extension UIStackView {
         return Self.vstack(views: views)
     }
     public static func vstack(views: [UIView]) -> UIStackView {
-        let vstack = UIVStackView(frame: .zero)
+        let vstack = UIStackView(frame: .zero)
+        vstack.axis = .vertical
         vstack.spacing = 0.0
         vstack.alignment = .fill
         views.forEach {
@@ -78,7 +35,8 @@ extension UIStackView {
         return Self.hstack(views: content())
     }
     public static func hstack(views: [UIView]) -> UIStackView {
-        let hstack = UIHStackView(frame: .zero)
+        let hstack = UIStackView(frame: .zero)
+        hstack.axis = .vertical
         hstack.spacing = 0.0
         hstack.alignment = .fill
         views.forEach {
