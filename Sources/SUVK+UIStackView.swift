@@ -36,7 +36,7 @@ extension UIStackView {
     }
     public static func hstack(views: [UIView]) -> UIStackView {
         let hstack = UIStackView(frame: .zero)
-        hstack.axis = .vertical
+        hstack.axis = .horizontal
         hstack.spacing = 0.0
         hstack.alignment = .fill
         views.forEach {
