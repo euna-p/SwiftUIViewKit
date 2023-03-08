@@ -10,7 +10,7 @@ Can more **EASILY** made UI.
 ```
 import UIKit
 import SwiftUIViewKit
-class MyView: SwiftUIViewKit {
+class MyView: SwiftUIView {
     func body: UIView {
         UIVStackView {
             UILabel("blah")
