@@ -115,7 +115,7 @@ extension UILabel {
         var style: NSMutableParagraphStyle?
         attributedText
             .enumerateAttributes(in: NSRange(location: 0, length: attributedText.length),
-                                 using: {value, range, _ in
+                                 using: {value, _, _ in
                 value.forEach {
                     guard $0.key == .paragraphStyle else { return }
                     if let value = $0.value as? NSMutableParagraphStyle {

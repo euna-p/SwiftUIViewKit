@@ -14,10 +14,10 @@ import RxCocoa
 extension UIView {
     @discardableResult
     public func subscribe<V: UIView, T>(_ observer: Observable<T>,
-                                 at when: SwiftUIView.SubscribeAt = .always,
-                                 by disposeBag: DisposeBag,
-                                 onNext: @escaping (V, T)->Void,
-                                 file: String = #file, function: String = #function, lineNumber: Int = #line)
+                                        at when: SwiftUIView.SubscribeAt = .always,
+                                        by disposeBag: DisposeBag,
+                                        onNext: @escaping (V, T)->Void,
+                                        file: String = #file, function: String = #function, lineNumber: Int = #line)
     -> Self {
         if let v = self as? V {
             var observer = observer
@@ -30,7 +30,7 @@ extension UIView {
                 observer = observer.distinctUntilChanged {
                     if let lhs = $0 as? (any Equatable), let rhs = $1 as? (any Equatable) {
                         return lhs.isEqual(rhs)
-                    } else  {
+                    } else {
                         if let style = Mirror(reflecting: $0).displayStyle {
                             switch style {
                             case .struct, .enum, .tuple, .optional, .collection, .dictionary:
@@ -44,7 +44,8 @@ extension UIView {
                         let fileName = file.components(separatedBy: "/").last ?? file
                         let log = String(format: "[SwiftUIKit] ⚠️ WARNING (%@:%lld %@): %@",
                                          fileName, lineNumber, function,
-                                         "An element is not `Equatable` on 'subscribe(_: at: by: onNext:)' by 'SwiftUIViewKit.SubscribeAt.untilChanged'.")
+                                         "An element is not `Equatable` on 'subscribe(_: at: by: onNext:)' "
+                                         + "by 'SwiftUIViewKit.SubscribeAt.untilChanged'.")
                         print(log)
                         return false
                     }
@@ -108,7 +109,10 @@ extension UIView {
 
 extension UIControl {
     @discardableResult
-    public func addTarget(by disposeBag: DisposeBag, for controlEvents: UIControl.Event, action: @escaping (()->Void)) -> Self {
+    public func addTarget(by disposeBag: DisposeBag,
+                          for controlEvents: UIControl.Event,
+                          action: @escaping (()->Void))
+    -> Self {
         self.rx.controlEvent(controlEvents)
             .subscribe(onNext: action)
             .disposed(by: disposeBag)
@@ -122,9 +126,9 @@ import RxRelay
 extension UIView {
     @discardableResult
     public func subscribe<V: UIView, T>(_ observer: BehaviorRelay<T>,
-                                 at when: SwiftUIView.SubscribeAt = .always,
-                                 by disposeBag: DisposeBag,
-                                 onNext: @escaping (V, T)->Void)
+                                        at when: SwiftUIView.SubscribeAt = .always,
+                                        by disposeBag: DisposeBag,
+                                        onNext: @escaping (V, T)->Void)
     -> Self {
         self.subscribe(observer.asObservable(), at: when, by: disposeBag, onNext: onNext)
         return self
@@ -141,7 +145,11 @@ extension UIView {
 
 extension UIView {
     @discardableResult
-    public func onTapGesture(count: Int = 1, finger: Int = 1, by disposeBag: DisposeBag, publish relay: PublishRelay<UITapGestureRecognizer>) -> Self {
+    public func onTapGesture(count: Int = 1,
+                             finger: Int = 1,
+                             by disposeBag: DisposeBag,
+                             publish relay: PublishRelay<UITapGestureRecognizer>)
+    -> Self {
         let gesture = UITapGestureRecognizer()
         gesture.numberOfTapsRequired    = count
         gesture.numberOfTouchesRequired = finger
@@ -153,13 +161,21 @@ extension UIView {
         return self
     }
     @discardableResult
-    public func onTapGesture(count: Int = 1, finger: Int = 1, by disposeBag: DisposeBag, publish relay: PublishRelay<Void>) -> Self {
+    public func onTapGesture(count: Int = 1,
+                             finger: Int = 1,
+                             by disposeBag: DisposeBag,
+                             publish relay: PublishRelay<Void>)
+    -> Self {
         let observer = PublishRelay<UITapGestureRecognizer>()
         observer.map({_ in }).bind(to: relay).disposed(by: disposeBag)
         return self.onTapGesture(count: count, finger: finger, by: disposeBag, publish: observer)
     }
     @discardableResult
-    public func onTapGesture(count: Int = 1, finger: Int = 1, by disposeBag: DisposeBag, perform action: @escaping (UITapGestureRecognizer)->Void) -> Self {
+    public func onTapGesture(count: Int = 1,
+                             finger: Int = 1,
+                             by disposeBag: DisposeBag,
+                             perform action: @escaping (UITapGestureRecognizer)->Void)
+    -> Self {
         let observer = PublishRelay<UITapGestureRecognizer>()
         observer
             .subscribe(onNext: action)
@@ -167,7 +183,11 @@ extension UIView {
         return self.onTapGesture(count: count, finger: finger, by: disposeBag, publish: observer)
     }
     @discardableResult
-    public func onTapGesture(count: Int = 1, finger: Int = 1, by disposeBag: DisposeBag, perform action: @escaping ()->Void) -> Self {
+    public func onTapGesture(count: Int = 1,
+                             finger: Int = 1,
+                             by disposeBag: DisposeBag,
+                             perform action: @escaping ()->Void)
+    -> Self {
         let observer = PublishRelay<Void>()
         observer
             .subscribe(onNext: action)
@@ -230,7 +250,10 @@ extension UIView {
 
 extension UIControl {
     @discardableResult
-    public func addTarget(to relay: PublishRelay<Void>, by disposeBag: DisposeBag, for controlEvents: UIControl.Event) -> Self {
+    public func addTarget(to relay: PublishRelay<Void>,
+                          by disposeBag: DisposeBag,
+                          for controlEvents: UIControl.Event)
+    -> Self {
         self.addTarget(by: disposeBag, for: controlEvents, action: { relay.accept(()) })
     }
 }

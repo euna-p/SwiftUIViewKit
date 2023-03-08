@@ -105,8 +105,14 @@ extension UIView {
             self.isHidden = false
             return self
         case .gone:
-            let width  = NSLayoutConstraint(item: self, attribute: .width,  relatedBy: .equal, toItem: nil, attribute: .width,  multiplier: 1.0, constant: 0.0)
-            let height = NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 0.0)
+            let width  = NSLayoutConstraint(item: self,  attribute: .width,
+                                            relatedBy: .equal, toItem: nil, attribute: .width,
+                                            multiplier: 1.0,
+                                            constant: 0.0)
+            let height = NSLayoutConstraint(item: self, attribute: .height,
+                                            relatedBy: .equal, toItem: nil, attribute: .height,
+                                            multiplier: 1.0,
+                                            constant: 0.0)
             width.accessibilityValue  = constraintKey
             height.accessibilityValue = constraintKey
             width.priority  = .medium
@@ -123,13 +129,25 @@ extension UIView {
 
 extension UIView {
     public func color(_ color: UIColor) -> Self {
-        if let view = self as? UILabel     { view.textColor = color }
-        if let view = self as? UITextField { view.textColor = color }
-        if let view = self as? UITextView  { view.textColor = color }
-        if let view = self as? UIImageView { view.tintColor = color }
+        if let view = self as? UILabel {
+            view.textColor = color
+        }
+        if let view = self as? UITextField {
+            view.textColor = color
+        }
+        if let view = self as? UITextView {
+            view.textColor = color
+        }
+        if let view = self as? UIImageView {
+            view.tintColor = color
+        }
         
-        if let view = self as? Divider       { view.color = color }
-        if let view = self as? DottedDivider { view.color = color }
+        if let view = self as? Divider {
+            view.color = color
+        }
+        if let view = self as? DottedDivider {
+            view.color = color
+        }
         
         self.subviews.forEach { _ = $0.color(color) }
         return self
@@ -239,7 +257,7 @@ extension UIView {
     
     public func ignoreSafeArea(_ edge: EdgePoint) -> UIView {
         guard #available(iOS 11.0, *),
-              let safeAreaInsets = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first?.safeAreaInsets
+              let safeAreaInsets = self.getKeyWindow()?.safeAreaInsets
         else { return self }
         
         switch edge {
@@ -251,6 +269,19 @@ extension UIView {
         case .vertical:   return self.ignoreSafeArea(.top).ignoreSafeArea(.bottom)
         case .all:
             return self.ignoreSafeArea(.top).ignoreSafeArea(.left).ignoreSafeArea(.right).ignoreSafeArea(.bottom)
+        }
+    }
+    
+    private func getKeyWindow() -> UIWindow? {
+        if #available(iOS 15.0, *) {
+            return UIApplication.shared.connectedScenes
+                        .filter { $0.activationState == .foregroundActive }
+                        .first { $0 is UIWindowScene }
+                        .flatMap { $0 as? UIWindowScene }?
+                        .windows
+                        .first(where: \.isKeyWindow)
+        } else {
+            return UIApplication.shared.windows.first(where: \.isKeyWindow)
         }
     }
 }
@@ -271,14 +302,23 @@ extension UIView {
     }
     
     public func frame(minWidth: CGFloat? = nil, minHeight: CGFloat? = nil,
-               maxWidth: CGFloat?  = nil, horizontalAlignment: HAlignment,
-               maxHeight: CGFloat? = nil, verticalAlignment: VAlignment,
-               width: CGFloat, height: CGFloat) -> UIView {
+                      maxWidth: CGFloat?  = nil, horizontalAlignment: HAlignment,
+                      maxHeight: CGFloat? = nil, verticalAlignment: VAlignment,
+                      width: CGFloat, height: CGFloat)
+    -> UIView {
         var corverView = self
-        if let value = minWidth  { corverView = corverView.frame(minWidth:  value) }
-        if let value = minHeight { corverView = corverView.frame(minHeight: value)   }
-        if let value = maxWidth  { corverView = corverView.frame(maxWidth:  value, horizontalAlignment: horizontalAlignment) }
-        if let value = maxHeight { corverView = corverView.frame(maxHeight: value, verticalAlignment:   verticalAlignment)   }
+        if let value = minWidth {
+            corverView = corverView.frame(minWidth:  value)
+        }
+        if let value = minHeight {
+            corverView = corverView.frame(minHeight: value)
+        }
+        if let value = maxWidth {
+            corverView = corverView.frame(maxWidth:  value, horizontalAlignment: horizontalAlignment)
+        }
+        if let value = maxHeight {
+            corverView = corverView.frame(maxHeight: value, verticalAlignment:   verticalAlignment)
+        }
         return corverView
             .frame(width:  width,  horizontalAlignment: horizontalAlignment)
             .frame(height: height, verticalAlignment:   verticalAlignment)
@@ -357,7 +397,8 @@ extension UIView {
     }
     
     public func frame(maxWidth: CGFloat,  horizontalAlignment: HAlignment = .center,
-               maxHeight: CGFloat, verticalAlignment: VAlignment   = .center) -> UIView {
+                      maxHeight: CGFloat, verticalAlignment: VAlignment   = .center)
+    -> UIView {
         self.frame(maxWidth:  maxWidth,  horizontalAlignment: horizontalAlignment)
             .frame(maxHeight: maxHeight, verticalAlignment:   verticalAlignment)
     }
@@ -408,8 +449,9 @@ extension UIView {
 
 extension UIView {
     public func sketchShadow(color: UIColor = .black, alpha: CGFloat = 1.0,
-                      x: CGFloat = 0.0, y: CGFloat = 0.0,
-                      blur: CGFloat = 0.0, spread: CGFloat = 0.0) -> Self {
+                             x: CGFloat = 0.0, y: CGFloat = 0.0,
+                             blur: CGFloat = 0.0, spread: CGFloat = 0.0)
+    -> Self {
         var r: CGFloat = 0.0,
             g: CGFloat = 0.0,
             b: CGFloat = 0.0,
@@ -449,8 +491,9 @@ extension UIView {
     }
     
     public static func corverView(_ views: UIView...,
-                           horizontalAlignment: HAlignment = .center,
-                           verticalAlignment: VAlignment   = .center) -> UIView {
+                                  horizontalAlignment: HAlignment = .center,
+                                  verticalAlignment: VAlignment   = .center)
+    -> UIView {
         let view = UIView(frame: .zero)
         
         views.forEach {

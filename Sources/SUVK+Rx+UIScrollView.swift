@@ -20,7 +20,9 @@ extension UIScrollView {
     }
     
     @discardableResult
-    public func contentOffset<T: UIScrollView>(onNext block: @escaping ((T, CGPoint)->Void), by disposeBag: DisposeBag) -> Self {
+    public func contentOffset<T: UIScrollView>(onNext block: @escaping ((T, CGPoint)->Void),
+                                               by disposeBag: DisposeBag)
+    -> Self {
         if let view = self as? T {
             self.rx.contentOffset
                 .skip(1)

@@ -18,11 +18,22 @@
 		5D066DF9299F17D7005A7B90 /* RxKeyboardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D066DF8299F17D7005A7B90 /* RxKeyboardResponder.swift */; };
 		5D066DFB299F1A46005A7B90 /* UIEdgeInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D066DFA299F1A46005A7B90 /* UIEdgeInsets.swift */; };
 		5D066DFD299F1B6F005A7B90 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D066DFC299F1B6F005A7B90 /* UIApplication.swift */; };
-		5D1F0EB329AC725F0011F5DF /* SwiftUIViewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5D1F0EB229AC725F0011F5DF /* SwiftUIViewKit */; };
 		5DA996AA2995D4B7008CF125 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA996A92995D4B7008CF125 /* MainView.swift */; };
+		5DD2775229B82D580017638C /* libSwiftUIViewKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DD2775129B82D440017638C /* libSwiftUIViewKit.a */; };
+		5DD2775329B82DC30017638C /* libSwiftUIViewKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DD2775129B82D440017638C /* libSwiftUIViewKit.a */; };
 		5DFA664D299628EC00A07A25 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFA664C299628EC00A07A25 /* MainViewModel.swift */; };
 		5DFA664F29962C1900A07A25 /* RxSwiftExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFA664E29962C1900A07A25 /* RxSwiftExtensions.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5DD2775029B82D440017638C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5DD2774C29B82D440017638C /* SwiftUIViewKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5DD2770829B81F3B0017638C;
+			remoteInfo = SwiftUIViewKit;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		5D6666592995E99900185AFD /* Embed Frameworks */ = {
@@ -51,8 +62,8 @@
 		5D066DF8299F17D7005A7B90 /* RxKeyboardResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxKeyboardResponder.swift; sourceTree = "<group>"; };
 		5D066DFA299F1A46005A7B90 /* UIEdgeInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIEdgeInsets.swift; sourceTree = "<group>"; };
 		5D066DFC299F1B6F005A7B90 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
-		5D1F0EA529AC55FC0011F5DF /* SwiftUIViewKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftUIViewKit; path = ../..; sourceTree = "<group>"; };
 		5DA996A92995D4B7008CF125 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		5DD2774C29B82D440017638C /* SwiftUIViewKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftUIViewKit.xcodeproj; path = ../../SwiftUIViewKit.xcodeproj; sourceTree = "<group>"; };
 		5DFA664C299628EC00A07A25 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		5DFA664E29962C1900A07A25 /* RxSwiftExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxSwiftExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -62,7 +73,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D1F0EB329AC725F0011F5DF /* SwiftUIViewKit in Frameworks */,
+				5DD2775229B82D580017638C /* libSwiftUIViewKit.a in Frameworks */,
+				5DD2775329B82DC30017638C /* libSwiftUIViewKit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,7 +84,7 @@
 		5D018E4E2995CE7100EC7C0B = {
 			isa = PBXGroup;
 			children = (
-				5D1F0EA529AC55FC0011F5DF /* SwiftUIViewKit */,
+				5DD2774C29B82D440017638C /* SwiftUIViewKit.xcodeproj */,
 				5D018E592995CE7100EC7C0B /* SwiftUIViewKitSampleApp */,
 				5D018E582995CE7100EC7C0B /* Products */,
 				5D6666552995E98F00185AFD /* Frameworks */,
@@ -140,6 +152,14 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		5DD2774D29B82D440017638C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5DD2775129B82D440017638C /* libSwiftUIViewKit.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -158,7 +178,6 @@
 			);
 			name = SwiftUIViewKitSampleApp;
 			packageProductDependencies = (
-				5D1F0EB229AC725F0011F5DF /* SwiftUIViewKit */,
 			);
 			productName = SwiftUIViewKitSampleApp;
 			productReference = 5D018E572995CE7100EC7C0B /* SwiftUIViewKitSampleApp.app */;
@@ -189,16 +208,31 @@
 			);
 			mainGroup = 5D018E4E2995CE7100EC7C0B;
 			packageReferences = (
-				5D1F0EA729AC70DC0011F5DF /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = 5D018E582995CE7100EC7C0B /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 5DD2774D29B82D440017638C /* Products */;
+					ProjectRef = 5DD2774C29B82D440017638C /* SwiftUIViewKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				5D018E562995CE7100EC7C0B /* SwiftUIViewKitSampleApp */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		5DD2775129B82D440017638C /* libSwiftUIViewKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSwiftUIViewKit.a;
+			remoteRef = 5DD2775029B82D440017638C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		5D018E552995CE7100EC7C0B /* Resources */ = {
@@ -448,24 +482,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		5D1F0EA729AC70DC0011F5DF /* XCRemoteSwiftPackageReference "RxSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		5D1F0EB229AC725F0011F5DF /* SwiftUIViewKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SwiftUIViewKit;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5D018E4F2995CE7100EC7C0B /* Project object */;
 }

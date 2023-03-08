@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
     name: "SwiftUIViewKit",
     platforms: [
-        .iOS(.v9),
+        .iOS(.v11),
     ],
     products: [
         .library(name: "SwiftUIViewKit", targets: ["SwiftUIViewKit"]),

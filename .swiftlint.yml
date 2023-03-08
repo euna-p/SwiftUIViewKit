@@ -1,0 +1,13 @@
+included:
+  - Sources
+disabled_rules:
+  - trailing_whitespace
+  - comma
+  - return_arrow_whitespace
+  - identifier_name
+  - nesting
+  - syntactic_sugar
+  - colon
+
+file_length: 
+    warning: 1000
