@@ -14,7 +14,7 @@ import RxRelay
 class MainView: SwiftUIView {
     private let disposeBag = DisposeBag()
 
-    private let viewModel = BehaviorRelay<MainViewModel>(value: .init())
+    private let viewModel = MainViewModel.relay
 
     private let topIconSize        = BehaviorRelay<CGSize>(value: .zero)
     private let isTextFieldFocused = BehaviorRelay<Bool>(value: false)
@@ -157,7 +157,7 @@ extension MainView {
                 UIHStackView(alignment: .center, spacing: 8.0) {
                     self.button(text: "-")
                         .onTapGesture(by: self.disposeBag) {[unowned self] in
-                            self.viewModel.unwrappedValue.clickedCount -= 1
+                            self.viewModel.decreaseCount()
                         }
                     UILabel(self.viewModel
                                 .map { String(format: "%lld", $0.clickedCount) }
@@ -171,7 +171,7 @@ extension MainView {
                                by: self.disposeBag)
                     self.button(text: "+")
                         .onTapGesture(by: self.disposeBag) {[unowned self] in
-                            self.viewModel.unwrappedValue.clickedCount += 1
+                            self.viewModel.increaseCount()
                         }
                 }
                 .priority(.required)

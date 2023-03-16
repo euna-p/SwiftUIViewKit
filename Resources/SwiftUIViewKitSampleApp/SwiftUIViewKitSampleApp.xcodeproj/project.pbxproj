@@ -18,6 +18,7 @@
 		5D066DF9299F17D7005A7B90 /* RxKeyboardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D066DF8299F17D7005A7B90 /* RxKeyboardResponder.swift */; };
 		5D066DFB299F1A46005A7B90 /* UIEdgeInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D066DFA299F1A46005A7B90 /* UIEdgeInsets.swift */; };
 		5D066DFD299F1B6F005A7B90 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D066DFC299F1B6F005A7B90 /* UIApplication.swift */; };
+		5D12162729C3193A000C9A45 /* Rx+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D12162629C3193A000C9A45 /* Rx+ViewModel.swift */; };
 		5DA996AA2995D4B7008CF125 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA996A92995D4B7008CF125 /* MainView.swift */; };
 		5DD2775229B82D580017638C /* libSwiftUIViewKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DD2775129B82D440017638C /* libSwiftUIViewKit.a */; };
 		5DD2775329B82DC30017638C /* libSwiftUIViewKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DD2775129B82D440017638C /* libSwiftUIViewKit.a */; };
@@ -62,6 +63,7 @@
 		5D066DF8299F17D7005A7B90 /* RxKeyboardResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxKeyboardResponder.swift; sourceTree = "<group>"; };
 		5D066DFA299F1A46005A7B90 /* UIEdgeInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIEdgeInsets.swift; sourceTree = "<group>"; };
 		5D066DFC299F1B6F005A7B90 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		5D12162629C3193A000C9A45 /* Rx+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+ViewModel.swift"; sourceTree = "<group>"; };
 		5DA996A92995D4B7008CF125 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		5DD2774C29B82D440017638C /* SwiftUIViewKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftUIViewKit.xcodeproj; path = ../../SwiftUIViewKit.xcodeproj; sourceTree = "<group>"; };
 		5DFA664C299628EC00A07A25 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				5D066DFA299F1A46005A7B90 /* UIEdgeInsets.swift */,
 				5D066DEF299E2D7F005A7B90 /* UITableViewExtensions.swift */,
 				5DFA664E29962C1900A07A25 /* RxSwiftExtensions.swift */,
+				5D12162629C3193A000C9A45 /* Rx+ViewModel.swift */,
 				5D066DF8299F17D7005A7B90 /* RxKeyboardResponder.swift */,
 			);
 			path = Utilities;
@@ -256,6 +259,7 @@
 				5DA996AA2995D4B7008CF125 /* MainView.swift in Sources */,
 				5DFA664F29962C1900A07A25 /* RxSwiftExtensions.swift in Sources */,
 				5D066DF7299E32A3005A7B90 /* SecondViewController.swift in Sources */,
+				5D12162729C3193A000C9A45 /* Rx+ViewModel.swift in Sources */,
 				5D066DF0299E2D7F005A7B90 /* UITableViewExtensions.swift in Sources */,
 				5D066DF3299E2F06005A7B90 /* SecondView.swift in Sources */,
 				5D066DF5299E2FFC005A7B90 /* SecondViewModel.swift in Sources */,

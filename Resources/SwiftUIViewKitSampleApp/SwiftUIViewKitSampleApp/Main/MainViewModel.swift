@@ -7,7 +7,17 @@
 
 import Foundation
 
-struct MainViewModel {
+struct MainViewModel: ViewModel {
     var userText: String = ""
     var clickedCount: Int = 0
+}
+
+extension ViewModel.Relay where Element == MainViewModel {
+    func increaseCount() {
+        self.unwrappedValue.clickedCount += 1
+    }
+    
+    func decreaseCount() {
+        self.unwrappedValue.clickedCount -= 1
+    }
 }

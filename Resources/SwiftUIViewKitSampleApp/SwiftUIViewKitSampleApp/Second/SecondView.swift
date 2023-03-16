@@ -14,7 +14,7 @@ import RxRelay
 class SecondView: SwiftUIView {
     private let disposeBag = DisposeBag()
     
-    private let viewModel = BehaviorRelay<SecondViewModel>(value: .init())
+    private let viewModel = SecondViewModel.relay
     
     private let selectedIdx    = BehaviorRelay<Int?>(value: nil)
     private let scrollPosition = BehaviorRelay<CGPoint>(value: .zero)

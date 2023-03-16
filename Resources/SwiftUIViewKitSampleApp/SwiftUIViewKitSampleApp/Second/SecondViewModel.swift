@@ -7,6 +7,10 @@
 
 import Foundation
 
-struct SecondViewModel {
+struct SecondViewModel: ViewModel {
     var list: [String] = ["1", "2", "3", "4", "5", "A", "B", "C", "D", "E", "F", "G"]
+}
+
+extension ViewModel.Relay where Element == SecondViewModel {
+    
 }
