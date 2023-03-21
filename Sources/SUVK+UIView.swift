@@ -175,12 +175,26 @@ extension UIView {
         return self
     }
     
-    public func overlay(_ view: UIView) -> Self {
+    public func overlay(_ view: UIView,
+                        horizontalAlignment: HAlignment? = nil,
+                        verticalAlignment: VAlignment? = nil)
+    -> Self {
         self.addSubview(view)
         self.bringSubviewToFront(view)
         view.didMoveToSuperview()
         view.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            switch horizontalAlignment {
+            case .left:   $0.leading.equalToSuperview()
+            case .center: $0.centerX.equalToSuperview()
+            case .right:  $0.trailing.equalToSuperview()
+            case .none:   $0.leading.trailing.equalToSuperview()
+            }
+            switch verticalAlignment {
+            case .top:    $0.top.equalToSuperview()
+            case .center: $0.centerY.equalToSuperview()
+            case .bottom: $0.bottom.equalToSuperview()
+            case .none:   $0.top.bottom.equalToSuperview()
+            }
         }
         return self
     }
