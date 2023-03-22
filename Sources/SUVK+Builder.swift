@@ -58,7 +58,7 @@ extension UIGroupView {
 }
 
 open class UIVStackView: UIStackView {
-    private var isPassthroughHit = false
+    private(set) var isPassthroughHit = false
     
     public override var axis: NSLayoutConstraint.Axis {
         get { return super.axis }
@@ -104,7 +104,7 @@ open class UIVStackView: UIStackView {
 }
 
 open class UIHStackView: UIStackView {
-    private var isPassthroughHit = false
+    private(set) var isPassthroughHit = false
     
     public override var axis: NSLayoutConstraint.Axis {
         get { return super.axis }
