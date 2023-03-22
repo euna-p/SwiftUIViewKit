@@ -52,8 +52,8 @@ extension UIView {
         return self
     }
     
-    private func corver() -> UIView {
-        let corverView = UIView(frame: .zero)
+    private func corver(isPassthroughHit: Bool) -> UIView {
+        let corverView = isPassthroughHit ? PaddingView(frame: .zero) : UIView(frame: .zero)
         corverView.backgroundColor = .clear
         corverView.addSubview(self)
         self.didMoveToSuperview()
@@ -229,8 +229,8 @@ extension UIView {
         case horizontal, vertical, all
     }
     
-    public func padding(_ edge: EdgePoint, _ value: CGFloat) -> UIView {
-        let view = self.corver()
+    public func padding(_ edge: EdgePoint, _ value: CGFloat, isPassthroughHit: Bool = false) -> UIView {
+        let view = self.corver(isPassthroughHit: isPassthroughHit)
         self.snp.makeConstraints {
             switch edge {
             case .top:
@@ -261,8 +261,8 @@ extension UIView {
         return view
     }
     
-    public func padding(_ value: UIEdgeInsets) -> UIView {
-        let view = self.corver()
+    public func padding(_ value: UIEdgeInsets, isPassthroughHit: Bool = false) -> UIView {
+        let view = self.corver(isPassthroughHit: isPassthroughHit)
         self.snp.makeConstraints {
             $0.edges.equalToSuperview().inset(value)
         }
@@ -353,7 +353,7 @@ extension UIView {
     }
     
     public func frame(width: CGFloat, horizontalAlignment: HAlignment) -> UIView {
-        let view = self.corver()
+        let view = self.corver(isPassthroughHit: false)
         self.set(horizontalAlignment: horizontalAlignment)
         self.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
@@ -365,7 +365,7 @@ extension UIView {
     }
     
     public func frame(height: CGFloat, verticalAlignment: VAlignment) -> UIView {
-        let view = self.corver()
+        let view = self.corver(isPassthroughHit: false)
         self.set(verticalAlignment: verticalAlignment)
         self.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
@@ -418,7 +418,7 @@ extension UIView {
     }
     
     public func frame(maxWidth: CGFloat, horizontalAlignment: HAlignment = .center) -> UIView {
-        let view = self.corver()
+        let view = self.corver(isPassthroughHit: false)
         self.set(horizontalAlignment: horizontalAlignment)
         self.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
@@ -430,7 +430,7 @@ extension UIView {
     }
     
     public func frame(maxHeight: CGFloat, verticalAlignment: VAlignment = .center) -> UIView {
-        let view = self.corver()
+        let view = self.corver(isPassthroughHit: false)
         self.set(verticalAlignment: verticalAlignment)
         self.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
@@ -519,4 +519,42 @@ extension UIView {
         
         return view
     }
+}
+
+class PaddingView: UIView {
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        guard let view = super.hitTest(point, with: event) else { return nil }
+        
+        if view == self /*let color = self.color(of: point), color.cgColor.alpha <= 0.0*/ {
+            return nil
+        }
+        
+        return view
+    }
+    
+    /*
+    private func color(of point: CGPoint) -> UIColor? {
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
+        
+        var pixel: [UInt8] = [0, 0, 0, 0]
+        
+        guard let context = CGContext(data:             &pixel,
+                                      width:            1,
+                                      height:           1,
+                                      bitsPerComponent: 8,
+                                      bytesPerRow:      4,
+                                      space:            colorSpace,
+                                      bitmapInfo:       bitmapInfo.rawValue)
+        else { return nil }
+        
+        context.translateBy(x: -point.x, y: -point.y)
+        self.layer.render(in: context)
+        
+        return UIColor(red:   CGFloat(pixel[0]) / 255.0,
+                       green: CGFloat(pixel[1]) / 255.0,
+                       blue:  CGFloat(pixel[2]) / 255.0,
+                       alpha: CGFloat(pixel[3]) / 255.0)
+    }
+    */
 }
