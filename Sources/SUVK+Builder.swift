@@ -96,8 +96,10 @@ open class UIVStackView: UIStackView {
         return view
     }
     
-    public func passthroughHit(_ flag: Bool = true) {
+    @discardableResult
+    public func passthroughHit(_ flag: Bool = true) -> Self {
         self.isPassthroughHit = flag
+        return self
     }
 }
 
@@ -140,8 +142,10 @@ open class UIHStackView: UIStackView {
         return view
     }
     
-    public func passthroughHit(_ flag: Bool = true) {
+    @discardableResult
+    public func passthroughHit(_ flag: Bool = true) -> Self {
         self.isPassthroughHit = flag
+        return self
     }
 }
 #endif
