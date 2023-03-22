@@ -525,15 +525,16 @@ class PaddingView: UIView {
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         guard let view = super.hitTest(point, with: event) else { return nil }
         
-        if view == self /*let color = self.color(of: point), color.cgColor.alpha <= 0.0*/ {
+        if view == self, let color = self.color(of: point), color.cgColor.alpha <= 0.0 {
             return nil
         }
         
         return view
     }
-    
-    /*
-    private func color(of point: CGPoint) -> UIColor? {
+}
+
+extension UIView {
+    func color(of point: CGPoint) -> UIColor? {
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
         
@@ -556,5 +557,4 @@ class PaddingView: UIView {
                        blue:  CGFloat(pixel[2]) / 255.0,
                        alpha: CGFloat(pixel[3]) / 255.0)
     }
-    */
 }

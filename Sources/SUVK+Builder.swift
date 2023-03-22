@@ -58,6 +58,8 @@ extension UIGroupView {
 }
 
 open class UIVStackView: UIStackView {
+    private var isPassthroughHit = false
+    
     public override var axis: NSLayoutConstraint.Axis {
         get { return super.axis }
         set { }
@@ -82,10 +84,26 @@ open class UIVStackView: UIStackView {
         content().forEach {
             self.addArrangedSubview($0)
         }
+    }
+    
+    public override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        guard let view = super.hitTest(point, with: event) else { return nil }
+        
+        if view == self, self.isPassthroughHit, let color = self.color(of: point), color.cgColor.alpha <= 0.0 {
+            return nil
+        }
+        
+        return view
+    }
+    
+    public func passthroughHit(_ flag: Bool = true) {
+        self.isPassthroughHit = flag
     }
 }
 
 open class UIHStackView: UIStackView {
+    private var isPassthroughHit = false
+    
     public override var axis: NSLayoutConstraint.Axis {
         get { return super.axis }
         set { }
@@ -110,6 +128,20 @@ open class UIHStackView: UIStackView {
         content().forEach {
             self.addArrangedSubview($0)
         }
+    }
+    
+    public override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        guard let view = super.hitTest(point, with: event) else { return nil }
+        
+        if view == self, self.isPassthroughHit, let color = self.color(of: point), color.cgColor.alpha <= 0.0 {
+            return nil
+        }
+        
+        return view
+    }
+    
+    public func passthroughHit(_ flag: Bool = true) {
+        self.isPassthroughHit = flag
     }
 }
 #endif
