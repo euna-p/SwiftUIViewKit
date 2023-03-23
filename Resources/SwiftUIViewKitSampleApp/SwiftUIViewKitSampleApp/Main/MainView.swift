@@ -34,6 +34,7 @@ class MainView: SwiftUIView {
                     self.clickerSampleView
                     Divider(lineWeight: 1.0)
                     self.navigateToSecondViewButton
+                    
                     //NOTE: - Use "for~in" and "if~else".
                     Divider(lineWeight: 1.0).color(.red)
                     UIHStackView {
@@ -41,16 +42,31 @@ class MainView: SwiftUIView {
                             if i == 1 || i == 10 {
                                 UILabel("\(i)")
                                     .font(.systemFont(ofSize: 12.0, weight: .bold))
-                                    .color(.lightGray)
                             } else {
                                 UILabel("\(i)")
                                     .font(.systemFont(ofSize: 12.0, weight: .thin))
-                                    .color(.lightGray)
                             }
                         }
                     }
-                    
                     .distribution(.equalSpacing)
+                    .color(.lightGray)
+                    
+                    UIHStackView(spacing: 4.0) {
+                        Subscriber(by: self.disposeBag)
+                            .forEach(.of(1...10)) {
+                                UILabel(String(format: "%d", $0))
+                                    .font(.systemFont(ofSize: 12.0, weight: $0 % 3 == 0 ? .bold : .thin))
+                            }
+                            .color(.lightGray)
+                    }
+                    .distribution(.equalSpacing)
+                    
+                    Subscriber(by: self.disposeBag)
+                        .if(self.isTextFieldFocused) {
+                            UILabel("Textfield is Focused!")
+                        } else: {
+                            UILabel("...")
+                        }
                 }
             }
             .padding(.top, 20.0)
