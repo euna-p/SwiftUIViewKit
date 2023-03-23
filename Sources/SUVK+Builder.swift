@@ -10,11 +10,6 @@ import UIKit
 
 import SnapKit
 
-#if canImport(RxSwift) && canImport(RxCocoa)
-import RxSwift
-import RxCocoa
-#endif
-
 @resultBuilder
 public struct ViewGroup {
     
@@ -25,29 +20,21 @@ extension ViewGroup {
         return components
     }
     
-    #if canImport(RxSwift) && canImport(RxCocoa)
     public static func buildOptional(_ component: [UIView]?) -> UIView {
         return UIGroupView(views: component ?? [])
     }
-    #endif
     
-    #if canImport(RxSwift) && canImport(RxCocoa)
     public static func buildEither(first component: [UIView]) -> UIView {
         return UIGroupView(views: component)
     }
-    #endif
     
-    #if canImport(RxSwift) && canImport(RxCocoa)
     public static func buildEither(second component: [UIView]) -> UIView {
         return UIGroupView(views: component)
     }
-    #endif
     
-    #if canImport(RxSwift) && canImport(RxCocoa)
     public static func buildArray(_ components: [[UIView]]) -> UIView {
         return UIGroupView(views: components.flatMap { $0 })
     }
-    #endif
 }
 
 extension UIGroupView {
@@ -148,4 +135,87 @@ open class UIHStackView: UIStackView {
         return self
     }
 }
+
+#if canImport(RxSwift) && canImport(RxCocoa)
+import RxSwift
+import RxCocoa
+
+open class Subscriber {
+    public typealias Block = ()->[UIView]
+    
+    private let disposeBag: DisposeBag
+    
+    public init(by disposeBag: DisposeBag) {
+        self.disposeBag = disposeBag
+    }
+}
+
+extension Subscriber {
+    public func `if`(_ observer: @autoclosure ()->BehaviorRelay<Bool>,
+                     @ViewGroup then: @escaping Block)
+    -> UIView {
+        self.if(observer().asObservable(), then: then)
+    }
+    
+    public func `if`(_ observer: @autoclosure ()->BehaviorRelay<Bool>,
+                     @ViewGroup then: @escaping Block,
+                     @ViewGroup else: @escaping Block)
+    -> UIView {
+        self.if(observer().asObservable(), then: then, else: `else`)
+    }
+    
+    public func `if`(_ observer: @autoclosure ()->Observable<Bool>,
+                     @ViewGroup then: @escaping Block)
+    -> UIView {
+        let view = UIGroupView()
+        observer()
+            .distinctUntilChanged()
+            .subscribe(onNext: {condition in
+                view.subviews.forEach { $0.removeFromSuperview() }
+                if condition {
+                    then().forEach { view.addArrangedSubview($0) }
+                }
+            })
+            .disposed(by: self.disposeBag)
+        return view
+    }
+    
+    public func `if`(_ observer: @autoclosure ()->Observable<Bool>,
+                     @ViewGroup then: @escaping Block,
+                     @ViewGroup else: @escaping Block)
+    -> UIView {
+        let view = UIGroupView()
+        observer()
+            .distinctUntilChanged()
+            .subscribe(onNext: {condition in
+                view.subviews.forEach { $0.removeFromSuperview() }
+                if condition {
+                    then().forEach { view.addArrangedSubview($0) }
+                } else {
+                    `else`().forEach { view.addArrangedSubview($0) }
+                }
+            })
+            .disposed(by: self.disposeBag)
+        return view
+    }
+}
+
+extension Subscriber {
+    public func forEach<T: Collection>(_ observer: @autoclosure ()->Observable<T>,
+                                       @ViewGroup perform: @escaping (T.Element)->[UIView])
+    -> UIView {
+        let view = UIGroupView()
+        observer()
+            .subscribe(onNext: {list in
+                view.subviews.forEach { $0.removeFromSuperview() }
+                list.forEach {
+                    perform($0).forEach { view.addArrangedSubview($0) }
+                }
+            })
+            .disposed(by: self.disposeBag)
+        return view
+    }
+}
+#endif
+
 #endif
