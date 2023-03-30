@@ -8,10 +8,6 @@
 import UIKit
 
 extension UIView {
-    public enum SubscribeAt {
-        case always, skip(Int), untilChanged
-    }
-    
     @discardableResult
     public func configuration<T: UIView>(_ perform: (T)->Void) -> Self {
         if let t = self as? T {
@@ -204,19 +200,38 @@ extension UIView {
         return self
     }
     
-    public func corner(radius: CGFloat) -> Self {
+    public func mask(toBound flag: Bool = true) -> Self {
+        self.layer.masksToBounds = flag
+        return self
+    }
+    
+    public func corner(radius: CGFloat, masksToBounds flag: Bool = true) -> Self {
         self.layer.cornerRadius = radius
-        self.layer.masksToBounds = true
+        self.layer.masksToBounds = flag
+        if #available(iOS 13.0, *) {
+            self.layer.cornerCurve = .continuous
+        }
         return self
     }
-    public func border(color: UIColor) -> Self {
+    
+    @available(iOS 13.0, *)
+    public func corner(curve: CALayerCornerCurve) -> Self {
+        self.layer.cornerCurve = curve
+        return self
+    }
+    
+    public func border(color: UIColor, masksToBounds flag: Bool = true) -> Self {
         self.layer.borderColor = color.cgColor
+        self.layer.masksToBounds = flag
         return self
     }
-    public func border(width: CGFloat) -> Self {
+    
+    public func border(width: CGFloat, masksToBounds flag: Bool = true) -> Self {
         self.layer.borderWidth = width
+        self.layer.masksToBounds = flag
         return self
     }
+    
     public func clip(_ flag: Bool = true) -> Self {
         self.clipsToBounds = flag
         return self

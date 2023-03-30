@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5DA354B629D52223006860D9 /* SUVK+Subscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA354B529D52223006860D9 /* SUVK+Subscriber.swift */; };
 		5DD2772729B81F6E0017638C /* SUVK+UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD2771329B81F6E0017638C /* SUVK+UILabel.swift */; };
 		5DD2772829B81F6E0017638C /* SUVK+Divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD2771429B81F6E0017638C /* SUVK+Divider.swift */; };
 		5DD2772929B81F6E0017638C /* SUVK+RxBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD2771529B81F6E0017638C /* SUVK+RxBase.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5DA354B529D52223006860D9 /* SUVK+Subscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SUVK+Subscriber.swift"; sourceTree = "<group>"; };
 		5DD2770829B81F3B0017638C /* libSwiftUIViewKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSwiftUIViewKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DD2771329B81F6E0017638C /* SUVK+UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SUVK+UILabel.swift"; sourceTree = "<group>"; };
 		5DD2771429B81F6E0017638C /* SUVK+Divider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SUVK+Divider.swift"; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				5DD2771429B81F6E0017638C /* SUVK+Divider.swift */,
 				5DD2772029B81F6E0017638C /* SUVK+DottedDivider.swift */,
 				5DD2771529B81F6E0017638C /* SUVK+RxBase.swift */,
+				5DA354B529D52223006860D9 /* SUVK+Subscriber.swift */,
 				5DD2771A29B81F6E0017638C /* SUVK+Rx+UIView.swift */,
 				5DD2772629B81F6E0017638C /* SUVK+Rx+UIScrollView.swift */,
 				5DD2771C29B81F6E0017638C /* SUVK+Rx+UILabel.swift */,
@@ -237,6 +240,7 @@
 				5DD2773429B81F6E0017638C /* SUVK+DottedDivider.swift in Sources */,
 				5DD2773129B81F6E0017638C /* SUVK+UIStackView.swift in Sources */,
 				5DD2772A29B81F6E0017638C /* SUVK+GroupView.swift in Sources */,
+				5DA354B629D52223006860D9 /* SUVK+Subscriber.swift in Sources */,
 				5DD2773029B81F6E0017638C /* SUVK+Rx+UILabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

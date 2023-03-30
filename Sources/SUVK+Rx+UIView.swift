@@ -11,6 +11,12 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+extension UIViewKitClass {
+    public enum SubscribeAt {
+        case always, skip(Int), untilChanged
+    }
+}
+
 extension UIView {
     @discardableResult
     public func subscribe<V: UIView, T>(_ observer: Observable<T>,
@@ -198,34 +204,53 @@ extension UIView {
 
 extension UIView {
     @discardableResult
-    public func corner(radius: Observable<CGFloat>, by disposeBag: DisposeBag) -> Self {
-        radius.subscribe(onNext: {
-            self.layer.cornerRadius = $0
-            self.layer.masksToBounds = true
-        })
-        .disposed(by: disposeBag)
-        return self
-    }
-    @discardableResult
-    public func border(color: Observable<UIColor>, by disposeBag: DisposeBag) -> Self {
-        color.subscribe(onNext: {
-            self.layer.borderColor = $0.cgColor
-        })
-        .disposed(by: disposeBag)
-        return self
-    }
-    @discardableResult
-    public func border(width: Observable<CGFloat>, by disposeBag: DisposeBag) -> Self {
-        width.subscribe(onNext: {
-            self.layer.borderWidth = $0
-        })
-        .disposed(by: disposeBag)
+    public func mask(toBound flag: Observable<Bool>, by disposeBag: DisposeBag) -> Self {
+        flag.subscribe(onNext: { self.layer.masksToBounds = $0 })
+            .disposed(by: disposeBag)
         return self
     }
     
     @discardableResult
+    public func corner(radius: Observable<CGFloat>, by disposeBag: DisposeBag) -> Self {
+        radius.subscribe(onNext: { self.layer.cornerRadius = $0 })
+            .disposed(by: disposeBag)
+        return self
+    }
+    
+    @available(iOS 13.0, *)
+    @discardableResult
+    public func corner(curve: Observable<CALayerCornerCurve>, by disposeBag: DisposeBag) -> Self {
+        curve.subscribe(onNext: { self.layer.cornerCurve = $0 })
+            .disposed(by: disposeBag)
+        return self
+    }
+    
+    @discardableResult
+    public func border(color: Observable<UIColor>, by disposeBag: DisposeBag) -> Self {
+        color.subscribe(onNext: { self.layer.borderColor = $0.cgColor })
+            .disposed(by: disposeBag)
+        return self
+    }
+    
+    @discardableResult
+    public func border(width: Observable<CGFloat>, by disposeBag: DisposeBag) -> Self {
+        width.subscribe(onNext: { self.layer.borderWidth = $0 })
+            .disposed(by: disposeBag)
+        return self
+    }
+    
+    @discardableResult
+    public func mask(toBound flag: BehaviorRelay<Bool>, by disposeBag: DisposeBag) -> Self {
+        self.mask(toBound: flag.asObservable(), by: disposeBag)
+    }
+    @discardableResult
     public func corner(radius: BehaviorRelay<CGFloat>, by disposeBag: DisposeBag) -> Self {
         self.corner(radius: radius.asObservable(), by: disposeBag)
+    }
+    @available(iOS 13.0, *)
+    @discardableResult
+    public func corner(curve: BehaviorRelay<CALayerCornerCurve>, by disposeBag: DisposeBag) -> Self {
+        self.corner(curve: curve.asObservable(), by: disposeBag)
     }
     @discardableResult
     public func border(color: BehaviorRelay<UIColor>, by disposeBag: DisposeBag) -> Self {
@@ -259,10 +284,3 @@ extension UIControl {
 }
 #endif
 #endif
-
-extension Equatable {
-    fileprivate func isEqual(_ other: any Equatable) -> Bool {
-        guard let other = other as? Self else { return false }
-        return self == other
-    }
-}
