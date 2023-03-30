@@ -51,22 +51,13 @@ class MainView: SwiftUIView {
                     .distribution(.equalSpacing)
                     .color(.lightGray)
                     
-                    UIHStackView(spacing: 4.0) {
-                        Subscriber(by: self.disposeBag)
-                            .forEach(.of(1...10)) {
-                                UILabel(String(format: "%d", $0))
-                                    .font(.systemFont(ofSize: 12.0, weight: $0 % 3 == 0 ? .bold : .thin))
-                            }
-                            .color(.lightGray)
-                    }
-                    .distribution(.equalSpacing)
-                    
-                    Subscriber(by: self.disposeBag)
-                        .if(self.isTextFieldFocused) {
+                    Subscriber(self.isTextFieldFocused, by: self.disposeBag) {
+                        if $0 {
                             UILabel("Textfield is Focused!")
-                        } else: {
+                        } else {
                             UILabel("...")
                         }
+                    }
                 }
             }
             .padding(.top, 20.0)
