@@ -217,14 +217,6 @@ extension UIView {
         return self
     }
     
-    @available(iOS 13.0, *)
-    @discardableResult
-    public func corner(curve: Observable<CALayerCornerCurve>, by disposeBag: DisposeBag) -> Self {
-        curve.subscribe(onNext: { self.layer.cornerCurve = $0 })
-            .disposed(by: disposeBag)
-        return self
-    }
-    
     @discardableResult
     public func border(color: Observable<UIColor>, by disposeBag: DisposeBag) -> Self {
         color.subscribe(onNext: { self.layer.borderColor = $0.cgColor })
@@ -240,17 +232,8 @@ extension UIView {
     }
     
     @discardableResult
-    public func mask(toBound flag: BehaviorRelay<Bool>, by disposeBag: DisposeBag) -> Self {
-        self.mask(toBound: flag.asObservable(), by: disposeBag)
-    }
-    @discardableResult
     public func corner(radius: BehaviorRelay<CGFloat>, by disposeBag: DisposeBag) -> Self {
         self.corner(radius: radius.asObservable(), by: disposeBag)
-    }
-    @available(iOS 13.0, *)
-    @discardableResult
-    public func corner(curve: BehaviorRelay<CALayerCornerCurve>, by disposeBag: DisposeBag) -> Self {
-        self.corner(curve: curve.asObservable(), by: disposeBag)
     }
     @discardableResult
     public func border(color: BehaviorRelay<UIColor>, by disposeBag: DisposeBag) -> Self {

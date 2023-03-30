@@ -214,12 +214,6 @@ extension UIView {
         return self
     }
     
-    @available(iOS 13.0, *)
-    public func corner(curve: CALayerCornerCurve) -> Self {
-        self.layer.cornerCurve = curve
-        return self
-    }
-    
     public func border(color: UIColor, masksToBounds flag: Bool = true) -> Self {
         self.layer.borderColor = color.cgColor
         self.layer.masksToBounds = flag
