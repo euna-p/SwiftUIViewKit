@@ -247,14 +247,14 @@ extension UIView {
 
 extension UIView {
     @discardableResult
-    func corner(radius: CGFloat, to corners: UIRectCorner, by disposeBag: DisposeBag) -> Self {
+    public func corner(radius: CGFloat, to corners: UIRectCorner, by disposeBag: DisposeBag) -> Self {
         return self.corner(radius: CGSize(width: radius, height: radius),
                            to: corners,
                            by: disposeBag)
     }
     
     @discardableResult
-    func corner(radius: CGSize, to corners: UIRectCorner, by disposeBag: DisposeBag) -> Self {
+    public func corner(radius: CGSize, to corners: UIRectCorner, by disposeBag: DisposeBag) -> Self {
         self.rx.observe(CGRect.self, #keyPath(UIView.bounds))
             .distinctUntilChanged()
             .subscribe(onNext: {[weak self] bounds in
