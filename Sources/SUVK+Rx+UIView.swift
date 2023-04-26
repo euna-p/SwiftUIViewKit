@@ -247,6 +247,35 @@ extension UIView {
 
 extension UIView {
     @discardableResult
+    func corner(radius: CGFloat, to corners: UIRectCorner, by disposeBag: DisposeBag) -> Self {
+        return self.corner(radius: CGSize(width: radius, height: radius),
+                           to: corners,
+                           by: disposeBag)
+    }
+    
+    @discardableResult
+    func corner(radius: CGSize, to corners: UIRectCorner, by disposeBag: DisposeBag) -> Self {
+        self.rx.observe(CGRect.self, #keyPath(UIView.bounds))
+            .distinctUntilChanged()
+            .subscribe(onNext: {[weak self] bounds in
+                guard let bounds = bounds else { return }
+                let path = UIBezierPath(roundedRect:       bounds,
+                                        byRoundingCorners: corners,
+                                        cornerRadii:       radius)
+                let maskLayer = CAShapeLayer()
+                maskLayer.path = path.cgPath
+                self?.layer.mask          = maskLayer
+                self?.layer.masksToBounds = true
+                self?.layer.borderColor   = UIColor.clear.cgColor
+                self?.layer.borderWidth   = 0.0
+            })
+            .disposed(by: disposeBag)
+        return self
+    }
+}
+
+extension UIView {
+    @discardableResult
     public func onResize(to relay: PublishRelay<CGSize>, by disposeBag: DisposeBag) -> Self {
         self.onResize({ relay.accept($1) }, by: disposeBag)
     }
