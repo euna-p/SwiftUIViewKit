@@ -44,6 +44,13 @@ extension UIGroupView {
     }
 }
 
+extension UIZStackView {
+    public convenience init(alignment: UIStackView.Alignment = .fill, @ViewGroup content: (()->[UIView])) {
+        self.init(content: content())
+        _ = self.alignment(alignment)
+    }
+}
+
 open class UIVStackView: UIStackView {
     private(set) var isPassthroughHit = false
     
