@@ -96,7 +96,7 @@ class SecondView: SwiftUIView {
             .alignment(.center)
             .lineLimit(0)
             .color(.darkGray)
-            DottedDivider()
+            UIDottedDivider()
             UILabel(
                 Observable.combineLatest(
                     self.viewModel.map({ $0.list }),

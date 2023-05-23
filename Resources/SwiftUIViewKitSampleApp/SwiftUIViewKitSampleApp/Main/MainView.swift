@@ -26,17 +26,17 @@ class MainView: SwiftUIView {
         UIVScrollView {
             UIVStackView(spacing: 26.0) {
                 self.topView
-                DottedDivider()
+                UIDottedDivider()
                     .setPattern(line: 8.0, space: 2.0)
                 UIVStackView(spacing: 16.0) {
                     self.textFieldSampleView
-                    Divider(lineWeight: 1.0)
+                    UIDivider(lineWeight: 1.0)
                     self.clickerSampleView
-                    Divider(lineWeight: 1.0)
+                    UIDivider(lineWeight: 1.0)
                     self.navigateToSecondViewButton
                     
                     //NOTE: - Use "for~in" and "if~else".
-                    Divider(lineWeight: 1.0).color(.red)
+                    UIDivider(lineWeight: 1.0).color(.red)
                     UIHStackView {
                         for i in 1...10 {
                             if i == 1 || i == 10 {
@@ -123,7 +123,7 @@ extension MainView {
                         tf.placeholder = "Input some text and click button!"
                     }
                     .background(
-                        Divider()
+                        UIDivider()
                             .color(self.isTextFieldFocused.map({ $0 ? .cyan : .lightGray }),
                                    by: self.disposeBag)
                             .frame(maxHeight: .greatestFiniteMagnitude,
