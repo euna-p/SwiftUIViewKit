@@ -51,7 +51,6 @@ extension UIZStackView {
     }
     
     public func addArrangedSubview(_ view: UIView) {
-        print("TEST: \(view) \(self.alignment)")
         self.addSubview(view)
         view.snp.makeConstraints {
             switch self.alignment {
