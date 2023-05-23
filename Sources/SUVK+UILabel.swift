@@ -8,29 +8,6 @@
 import UIKit
 
 extension UILabel {
-    public enum LineHeightBaselineOffset: CGFloat {
-        case top          = 1.0,
-             halfOfTop    = 0.75,
-             middle       = 0.5,
-             halfOfBottom = 0.25,
-             bottom       = 0.0
-    }
-    
-    public var lineHeight: CGFloat? {
-        get {
-            let style = self.getStyle()
-            guard style.minimumLineHeight > 0.0, style.maximumLineHeight > 0.0,
-                  style.minimumLineHeight == style.maximumLineHeight
-            else { return nil }
-            return style.maximumLineHeight
-        }
-        set {
-            if let newValue = newValue {
-                _ = self.lineHeight(newValue)
-            }
-        }
-    }
-    
     public convenience init(_ text: String?) {
         self.init(frame: .zero)
         self.text = text
@@ -77,7 +54,35 @@ extension UILabel {
         }
         self.attributedText = attributedText
     }
+}
+
+extension UILabel {
+    @discardableResult
+    public func font(_ font: UIFont?) -> Self {
+        self.font = font
+        return self
+    }
     
+    @discardableResult
+    public func alignment(_ textAlignment: NSTextAlignment) -> Self {
+        self.textAlignment = textAlignment
+        return self
+    }
+    
+    @discardableResult
+    public func lineLimit(_ numberOfLines: Int?) -> Self {
+        self.numberOfLines = numberOfLines ?? 0
+        return self
+    }
+    
+    @discardableResult
+    public func size(_ textSize: CGFloat) -> Self {
+        self.font = self.font?.withSize(textSize)
+        return self
+    }
+}
+
+extension UILabel {
     @discardableResult
     public func underLine(_ flag: Bool = true) -> Self {
         let attributedText: NSMutableAttributedString = {
@@ -97,7 +102,9 @@ extension UILabel {
         
         return self
     }
-    
+}
+
+extension UILabel {
     private func getAttriburedText() -> NSMutableAttributedString {
         if let value = self.attributedText {
             return NSMutableAttributedString(attributedString: value)
@@ -123,9 +130,42 @@ extension UILabel {
         
         return style ?? NSMutableParagraphStyle()
     }
+}
+
+extension UILabel {
+    public enum LineHeightBaselineOffset: CGFloat {
+        case top    = 1.0,
+             middle = 0.5,
+             bottom = 0.0
+    }
+    
+    public var lineHeight: CGFloat? {
+        get {
+            let style = self.getStyle()
+            guard style.minimumLineHeight > 0.0, style.maximumLineHeight > 0.0,
+                  style.minimumLineHeight == style.maximumLineHeight
+            else { return nil }
+            return style.maximumLineHeight
+        }
+        set {
+            if let newValue = newValue {
+                _ = self.lineHeight(newValue)
+            }
+        }
+    }
     
     @discardableResult
-    public func lineHeight(_ value: CGFloat, adjust offset: LineHeightBaselineOffset = .middle) -> Self {
+    public func lineHeight(_ value: CGFloat) -> Self {
+        return self.lineHeight(value, in: .middle)
+    }
+    
+    @discardableResult
+    public func lineHeight(_ value: CGFloat, in offset: LineHeightBaselineOffset) -> Self {
+        return self.lineHeight(value, adjust: offset.rawValue)
+    }
+    
+    @discardableResult
+    public func lineHeight(_ value: CGFloat, adjust offset: CGFloat) -> Self {
         guard let font = self.font else { return self }
         
         let attributedText = self.getAttriburedText()
@@ -137,7 +177,7 @@ extension UILabel {
         style.lineBreakMode     = self.lineBreakMode
         
         let attributes: [NSAttributedString.Key: Any] = [.paragraphStyle: style,
-                                                         .baselineOffset: (value - font.lineHeight) * offset.rawValue]
+                                                         .baselineOffset: (value - font.lineHeight) * offset]
         
         let range = NSRange(location: 0, length: attributedText.length)
         attributedText.addAttributes(attributes, range: range)
@@ -149,7 +189,9 @@ extension UILabel {
         
         return self
     }
-    
+}
+
+extension UILabel {
     @discardableResult
     public func lineSpacing(_ value: CGFloat) -> Self {
         let attributedText = self.getAttriburedText()
@@ -168,7 +210,9 @@ extension UILabel {
         
         return self
     }
-    
+}
+
+extension UILabel {
     @discardableResult
     public func lineBreak(_ value: NSLineBreakMode = .byTruncatingTail) -> Self {
         let attributedText = self.getAttriburedText()
@@ -191,30 +235,6 @@ extension UILabel {
             }
         }
         
-        return self
-    }
-    
-    @discardableResult
-    public func font(_ font: UIFont?) -> Self {
-        self.font = font
-        return self
-    }
-    
-    @discardableResult
-    public func alignment(_ textAlignment: NSTextAlignment) -> Self {
-        self.textAlignment = textAlignment
-        return self
-    }
-    
-    @discardableResult
-    public func lineLimit(_ numberOfLines: Int?) -> Self {
-        self.numberOfLines = numberOfLines ?? 0
-        return self
-    }
-    
-    @discardableResult
-    public func size(_ textSize: CGFloat) -> Self {
-        self.font = self.font?.withSize(textSize)
         return self
     }
 }
