@@ -8,7 +8,13 @@
 import UIKit
 
 extension UILabel {
-    private static var lineHeight: [UILabel: CGFloat] = [:]
+    public enum LineHeightBaselineOffset: CGFloat {
+        case top          = 1.0,
+             halfOfTop    = 0.75,
+             middle       = 0.5,
+             halfOfBottom = 0.25,
+             bottom       = 0.0
+    }
     
     public var lineHeight: CGFloat? {
         get {
@@ -16,7 +22,6 @@ extension UILabel {
             guard style.minimumLineHeight > 0.0, style.maximumLineHeight > 0.0,
                   style.minimumLineHeight == style.maximumLineHeight
             else { return nil }
-            Self.lineHeight[self] = style.maximumLineHeight
             return style.maximumLineHeight
         }
         set {
@@ -120,7 +125,7 @@ extension UILabel {
     }
     
     @discardableResult
-    public func lineHeight(_ value: CGFloat) -> Self {
+    public func lineHeight(_ value: CGFloat, adjust offset: LineHeightBaselineOffset = .middle) -> Self {
         guard let font = self.font else { return self }
         
         let attributedText = self.getAttriburedText()
@@ -132,7 +137,7 @@ extension UILabel {
         style.lineBreakMode     = self.lineBreakMode
         
         let attributes: [NSAttributedString.Key: Any] = [.paragraphStyle: style,
-                                                         .baselineOffset: (value - font.lineHeight) / 4.0]
+                                                         .baselineOffset: (value - font.lineHeight) * offset.rawValue]
         
         let range = NSRange(location: 0, length: attributedText.length)
         attributedText.addAttributes(attributes, range: range)
