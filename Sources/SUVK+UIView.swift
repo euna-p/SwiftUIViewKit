@@ -138,10 +138,10 @@ extension UIView {
             view.tintColor = color
         }
         
-        if let view = self as? Divider {
+        if let view = self as? UIDivider {
             view.color = color
         }
-        if let view = self as? DottedDivider {
+        if let view = self as? UIDottedDivider {
             view.color = color
         }
         

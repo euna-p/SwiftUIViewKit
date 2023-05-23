@@ -10,7 +10,7 @@
 		5D243FD22A0CB383001A8F1C /* SUVK+ZStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D243FD12A0CB383001A8F1C /* SUVK+ZStackView.swift */; };
 		5DA354B629D52223006860D9 /* SUVK+Subscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA354B529D52223006860D9 /* SUVK+Subscriber.swift */; };
 		5DD2772729B81F6E0017638C /* SUVK+UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD2771329B81F6E0017638C /* SUVK+UILabel.swift */; };
-		5DD2772829B81F6E0017638C /* SUVK+Divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD2771429B81F6E0017638C /* SUVK+Divider.swift */; };
+		5DD2772829B81F6E0017638C /* SUVK+UIDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD2771429B81F6E0017638C /* SUVK+UIDivider.swift */; };
 		5DD2772929B81F6E0017638C /* SUVK+RxBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD2771529B81F6E0017638C /* SUVK+RxBase.swift */; };
 		5DD2772A29B81F6E0017638C /* SUVK+GroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD2771629B81F6E0017638C /* SUVK+GroupView.swift */; };
 		5DD2772B29B81F6E0017638C /* SUVK+Rx+UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD2771729B81F6E0017638C /* SUVK+Rx+UITextField.swift */; };
@@ -22,7 +22,7 @@
 		5DD2773129B81F6E0017638C /* SUVK+UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD2771D29B81F6E0017638C /* SUVK+UIStackView.swift */; };
 		5DD2773229B81F6E0017638C /* SUVK+UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD2771E29B81F6E0017638C /* SUVK+UIImageView.swift */; };
 		5DD2773329B81F6E0017638C /* SUVK+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD2771F29B81F6E0017638C /* SUVK+Builder.swift */; };
-		5DD2773429B81F6E0017638C /* SUVK+DottedDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD2772029B81F6E0017638C /* SUVK+DottedDivider.swift */; };
+		5DD2773429B81F6E0017638C /* SUVK+UIDottedDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD2772029B81F6E0017638C /* SUVK+UIDottedDivider.swift */; };
 		5DD2773529B81F6E0017638C /* SUVKBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD2772129B81F6E0017638C /* SUVKBase.swift */; };
 		5DD2773629B81F6E0017638C /* Representable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD2772229B81F6E0017638C /* Representable.swift */; };
 		5DD2773729B81F6E0017638C /* SUVK+UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD2772329B81F6E0017638C /* SUVK+UITextField.swift */; };
@@ -52,7 +52,7 @@
 		5DA354B529D52223006860D9 /* SUVK+Subscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SUVK+Subscriber.swift"; sourceTree = "<group>"; };
 		5DD2770829B81F3B0017638C /* libSwiftUIViewKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSwiftUIViewKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DD2771329B81F6E0017638C /* SUVK+UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SUVK+UILabel.swift"; sourceTree = "<group>"; };
-		5DD2771429B81F6E0017638C /* SUVK+Divider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SUVK+Divider.swift"; sourceTree = "<group>"; };
+		5DD2771429B81F6E0017638C /* SUVK+UIDivider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SUVK+UIDivider.swift"; sourceTree = "<group>"; };
 		5DD2771529B81F6E0017638C /* SUVK+RxBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SUVK+RxBase.swift"; sourceTree = "<group>"; };
 		5DD2771629B81F6E0017638C /* SUVK+GroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SUVK+GroupView.swift"; sourceTree = "<group>"; };
 		5DD2771729B81F6E0017638C /* SUVK+Rx+UITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SUVK+Rx+UITextField.swift"; sourceTree = "<group>"; };
@@ -64,7 +64,7 @@
 		5DD2771D29B81F6E0017638C /* SUVK+UIStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SUVK+UIStackView.swift"; sourceTree = "<group>"; };
 		5DD2771E29B81F6E0017638C /* SUVK+UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SUVK+UIImageView.swift"; sourceTree = "<group>"; };
 		5DD2771F29B81F6E0017638C /* SUVK+Builder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SUVK+Builder.swift"; sourceTree = "<group>"; };
-		5DD2772029B81F6E0017638C /* SUVK+DottedDivider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SUVK+DottedDivider.swift"; sourceTree = "<group>"; };
+		5DD2772029B81F6E0017638C /* SUVK+UIDottedDivider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SUVK+UIDottedDivider.swift"; sourceTree = "<group>"; };
 		5DD2772129B81F6E0017638C /* SUVKBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SUVKBase.swift; sourceTree = "<group>"; };
 		5DD2772229B81F6E0017638C /* Representable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Representable.swift; sourceTree = "<group>"; };
 		5DD2772329B81F6E0017638C /* SUVK+UITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SUVK+UITextField.swift"; sourceTree = "<group>"; };
@@ -119,8 +119,9 @@
 				5DD2772329B81F6E0017638C /* SUVK+UITextField.swift */,
 				5DD2771E29B81F6E0017638C /* SUVK+UIImageView.swift */,
 				5DD2772529B81F6E0017638C /* SUVK+UILayoutPriority.swift */,
-				5DD2771429B81F6E0017638C /* SUVK+Divider.swift */,
-				5DD2772029B81F6E0017638C /* SUVK+DottedDivider.swift */,
+				5DD2771429B81F6E0017638C /* SUVK+UIDivider.swift */,
+				5DD2772029B81F6E0017638C /* SUVK+UIDottedDivider.swift */,
+				5D243FD12A0CB383001A8F1C /* SUVK+ZStackView.swift */,
 				5DD2771529B81F6E0017638C /* SUVK+RxBase.swift */,
 				5DA354B529D52223006860D9 /* SUVK+Subscriber.swift */,
 				5DD2771A29B81F6E0017638C /* SUVK+Rx+UIView.swift */,
@@ -128,7 +129,6 @@
 				5DD2771C29B81F6E0017638C /* SUVK+Rx+UILabel.swift */,
 				5DD2771B29B81F6E0017638C /* SUVK+Rx+UIImageView.swift */,
 				5DD2771729B81F6E0017638C /* SUVK+Rx+UITextField.swift */,
-				5D243FD12A0CB383001A8F1C /* SUVK+ZStackView.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -233,7 +233,7 @@
 				5DD2772E29B81F6E0017638C /* SUVK+Rx+UIView.swift in Sources */,
 				5DD2773329B81F6E0017638C /* SUVK+Builder.swift in Sources */,
 				5DD2772D29B81F6E0017638C /* SUVK+UIScrollView.swift in Sources */,
-				5DD2772829B81F6E0017638C /* SUVK+Divider.swift in Sources */,
+				5DD2772829B81F6E0017638C /* SUVK+UIDivider.swift in Sources */,
 				5DD2772929B81F6E0017638C /* SUVK+RxBase.swift in Sources */,
 				5DD2772C29B81F6E0017638C /* SUVK+UIView.swift in Sources */,
 				5DD2773629B81F6E0017638C /* Representable.swift in Sources */,
@@ -241,7 +241,7 @@
 				5DD2773729B81F6E0017638C /* SUVK+UITextField.swift in Sources */,
 				5D243FD22A0CB383001A8F1C /* SUVK+ZStackView.swift in Sources */,
 				5DD2772729B81F6E0017638C /* SUVK+UILabel.swift in Sources */,
-				5DD2773429B81F6E0017638C /* SUVK+DottedDivider.swift in Sources */,
+				5DD2773429B81F6E0017638C /* SUVK+UIDottedDivider.swift in Sources */,
 				5DD2773129B81F6E0017638C /* SUVK+UIStackView.swift in Sources */,
 				5DD2772A29B81F6E0017638C /* SUVK+GroupView.swift in Sources */,
 				5DA354B629D52223006860D9 /* SUVK+Subscriber.swift in Sources */,
