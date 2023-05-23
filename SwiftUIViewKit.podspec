@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name          = "SwiftUIViewKit"
-  s.version       = "1.0.28"
+  s.version       = "1.0.29"
   s.summary       = "Can more EASILY made UI."
   s.swift_version = "5.0"
 
