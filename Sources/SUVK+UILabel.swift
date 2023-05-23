@@ -133,6 +133,10 @@ extension UILabel {
 }
 
 extension UILabel {
+    private struct AssociatedKeys {
+        static var lineHeight = "lineHeight"
+    }
+    
     public enum LineHeightBaselineOffset: CGFloat {
         case top    = 1.0,
              middle = 0.5,
@@ -141,15 +145,12 @@ extension UILabel {
     
     public var lineHeight: CGFloat? {
         get {
-            let style = self.getStyle()
-            guard style.minimumLineHeight > 0.0, style.maximumLineHeight > 0.0,
-                  style.minimumLineHeight == style.maximumLineHeight
-            else { return nil }
-            return style.maximumLineHeight
+            return objc_getAssociatedObject(self, &AssociatedKeys.lineHeight) as? CGFloat
         }
         set {
+            objc_setAssociatedObject(self, &AssociatedKeys.lineHeight, newValue, .OBJC_ASSOCIATION_RETAIN)
             if let newValue = newValue {
-                _ = self.lineHeight(newValue)
+                self.lineHeight(newValue)
             }
         }
     }
@@ -176,6 +177,7 @@ extension UILabel {
         style.minimumLineHeight = value
         style.lineBreakMode     = self.lineBreakMode
         
+        let offset = min(max(offset, 0.0), 1.0)
         let attributes: [NSAttributedString.Key: Any] = [.paragraphStyle: style,
                                                          .baselineOffset: (value - font.lineHeight) * offset]
         
