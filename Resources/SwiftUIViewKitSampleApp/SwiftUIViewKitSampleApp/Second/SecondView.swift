@@ -138,7 +138,6 @@ import SwiftUI
 struct SecondView_Preview: PreviewProvider {
     static var previews: some View {
         SecondView.view
-            .previewDevice("iPhone 12 mini")
     }
 }
 #endif
