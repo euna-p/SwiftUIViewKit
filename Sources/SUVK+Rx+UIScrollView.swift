@@ -21,12 +21,13 @@ extension UIScrollView {
     
     @discardableResult
     public func contentOffset<T: UIScrollView>(onNext block: @escaping ((T, CGPoint)->Void),
+                                               on scheduler: ImmediateSchedulerType = MainScheduler.asyncInstance,
                                                by disposeBag: DisposeBag)
     -> Self {
         if let view = self as? T {
             self.rx.contentOffset
                 .skip(1)
-                .observe(on: MainScheduler.asyncInstance)
+                .observe(on: scheduler)
                 .subscribe(onNext: {offset in
                     block(view, offset)
                 })
@@ -36,10 +37,13 @@ extension UIScrollView {
     }
     
     @discardableResult
-    public func didEndScroll<T: UIScrollView>(onNext block: @escaping ((T)->Void), by disposeBag: DisposeBag) -> Self {
+    public func didEndScroll<T: UIScrollView>(onNext block: @escaping ((T)->Void),
+                                              on scheduler: ImmediateSchedulerType = MainScheduler.asyncInstance,
+                                              by disposeBag: DisposeBag)
+    -> Self {
         if let view = self as? T {
             self.rx.didEndScroll
-                .observe(on: MainScheduler.asyncInstance)
+                .observe(on: scheduler)
                 .subscribe(onNext: {
                     block(view)
                 })
@@ -49,10 +53,13 @@ extension UIScrollView {
     }
     
     @discardableResult
-    public func didScrollLast<T: UIScrollView>(onNext block: @escaping ((T)->Void), by disposeBag: DisposeBag) -> Self {
+    public func didScrollLast<T: UIScrollView>(onNext block: @escaping ((T)->Void),
+                                               on scheduler: ImmediateSchedulerType = MainScheduler.asyncInstance,
+                                               by disposeBag: DisposeBag)
+    -> Self {
         if let view = self as? T {
             self.rx.didScrollLast
-                .observe(on: MainScheduler.asyncInstance)
+                .observe(on: scheduler)
                 .subscribe(onNext: {
                     block(view)
                 })
