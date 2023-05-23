@@ -8,9 +8,14 @@
 import UIKit
 
 open class UIZStackView: UIView {
-    public var alignment: UIStackView.Alignment = .fill {
-        didSet { self.setAlignment() }
+    public enum Alignment {
+        case fill
+        case topLeft, top, topRight
+        case left, center, right
+        case bottomLeft, bottom, bottomRight
     }
+    
+    private var alignment: Alignment = .fill
     
     public convenience init(content: UIView...) {
         self.init(frame: .zero)
@@ -41,47 +46,72 @@ extension UIZStackView {
     private func setContent(_ content: [UIView]) {
         self.clearContent()
         content.forEach {
-            self.addSubview($0)
+            self.addArrangedSubview($0)
         }
-        self.setAlignment()
     }
     
-    private func setAlignment() {
-        self.subviews.forEach {view in
-            view.removeFromSuperview()
-            self.addSubview(view)
-            view.snp.makeConstraints {
-                switch self.alignment {
-                case .fill:     $0.edges.equalToSuperview()
-                case .top:      $0.top.equalToSuperview()
-                case .leading:  $0.leading.equalToSuperview()
-                case .center:   $0.centerX.centerY.equalToSuperview()
-                case .trailing: $0.trailing.equalToSuperview()
-                case .bottom:   $0.bottom.equalToSuperview()
-                default:        break
-                }
-                if self.alignment != .fill {
-                    if self.alignment != .top {
-                        $0.top.greaterThanOrEqualToSuperview()
-                    }
-                    if self.alignment != .leading {
-                        $0.leading.greaterThanOrEqualToSuperview()
-                    }
-                    if self.alignment != .trailing {
-                        $0.trailing.lessThanOrEqualToSuperview()
-                    }
-                    if self.alignment != .bottom {
-                        $0.bottom.lessThanOrEqualToSuperview()
-                    }
-                }
+    public func addArrangedSubview(_ view: UIView) {
+        print("TEST: \(view) \(self.alignment)")
+        self.addSubview(view)
+        view.snp.makeConstraints {
+            switch self.alignment {
+            case .fill:
+                $0.edges.equalToSuperview()
+            case .topLeft:
+                $0.top.leading.equalToSuperview()
+                $0.trailing.bottom.lessThanOrEqualToSuperview()
+            case .top:
+                $0.top.equalToSuperview()
+                $0.centerX.equalToSuperview()
+                $0.leading.greaterThanOrEqualToSuperview()
+                $0.trailing.bottom.lessThanOrEqualToSuperview()
+            case .topRight:
+                $0.top.trailing.equalToSuperview()
+                $0.leading.greaterThanOrEqualToSuperview()
+                $0.bottom.lessThanOrEqualToSuperview()
+            case .left:
+                $0.top.greaterThanOrEqualToSuperview()
+                $0.centerY.equalToSuperview()
+                $0.leading.equalToSuperview()
+                $0.trailing.bottom.lessThanOrEqualToSuperview()
+            case .center:
+                $0.top.leading.greaterThanOrEqualToSuperview()
+                $0.centerX.centerY.equalToSuperview()
+                $0.trailing.bottom.lessThanOrEqualToSuperview()
+            case .right:
+                $0.top.leading.greaterThanOrEqualToSuperview()
+                $0.centerY.equalToSuperview()
+                $0.trailing.equalToSuperview()
+                $0.bottom.lessThanOrEqualToSuperview()
+            case .bottomLeft:
+                $0.top.greaterThanOrEqualToSuperview()
+                $0.leading.equalToSuperview()
+                $0.trailing.lessThanOrEqualToSuperview()
+                $0.bottom.equalToSuperview()
+            case .bottom:
+                $0.top.leading.greaterThanOrEqualToSuperview()
+                $0.centerX.equalToSuperview()
+                $0.trailing.lessThanOrEqualToSuperview()
+                $0.bottom.equalToSuperview()
+            case .bottomRight:
+                $0.top.leading.greaterThanOrEqualToSuperview()
+                $0.trailing.bottom.equalToSuperview()
             }
         }
+        self.setNeedsLayout()
     }
 }
 
 extension UIZStackView {
-    public func alignment(_ alignment: UIStackView.Alignment) -> Self {
-        self.alignment = alignment
+    @discardableResult
+    public func alignment(_ alignment: Alignment) -> Self {
+        if self.alignment != alignment {
+            self.alignment = alignment
+            self.subviews.forEach {
+                $0.removeFromSuperview()
+                self.addArrangedSubview($0)
+            }
+        }
         return self
     }
 }

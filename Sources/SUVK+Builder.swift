@@ -45,9 +45,9 @@ extension UIGroupView {
 }
 
 extension UIZStackView {
-    public convenience init(alignment: UIStackView.Alignment = .fill, @ViewGroup content: (()->[UIView])) {
+    public convenience init(alignment: Alignment = .fill, @ViewGroup content: (()->[UIView])) {
         self.init(content: content())
-        _ = self.alignment(alignment)
+        self.alignment(alignment)
     }
 }
 
