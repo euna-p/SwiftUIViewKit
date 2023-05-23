@@ -12,24 +12,16 @@ extension UILabel {
     
     public var lineHeight: CGFloat? {
         get {
-            if let lineHeight = Self.lineHeight[self] {
-                return lineHeight
-            } else {
-                let style = self.getStyle()
-                if style.minimumLineHeight > 0.0, style.maximumLineHeight > 0.0,
-                   style.minimumLineHeight == style.maximumLineHeight {
-                    Self.lineHeight[self] = style.maximumLineHeight
-                    return style.maximumLineHeight
-                }
-            }
-            return nil
+            let style = self.getStyle()
+            guard style.minimumLineHeight > 0.0, style.maximumLineHeight > 0.0,
+                  style.minimumLineHeight == style.maximumLineHeight
+            else { return nil }
+            Self.lineHeight[self] = style.maximumLineHeight
+            return style.maximumLineHeight
         }
         set {
-            Self.lineHeight[self] = newValue
             if let newValue = newValue {
                 _ = self.lineHeight(newValue)
-            } else {
-                Self.lineHeight.removeValue(forKey: self)
             }
         }
     }
