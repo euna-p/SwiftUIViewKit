@@ -17,9 +17,20 @@ extension UILabel {
         observer
             .distinctUntilChanged()
             .subscribe(onNext: {value in
-                self.attributedText = value
-                if let lineHeight = self.lineHeight {
-                    _ = self.lineHeight(lineHeight)
+                if let font = self.font, let textColor = self.textColor, let lineHeight = self.lineHeight  {
+                    self.attributedText = {
+                        UILabel(attributed: value)
+                            .alignment(self.textAlignment)
+                            .font(font)
+                            .color(textColor)
+                            .lineHeight(lineHeight)
+                            .attributedText
+                    }()
+                } else {
+                    self.attributedText = value
+                    if let lineHeight = self.lineHeight {
+                        self.lineHeight(lineHeight)
+                    }
                 }
             })
             .disposed(by: disposeBag)
@@ -34,9 +45,20 @@ extension UILabel {
         observer
             .distinctUntilChanged()
             .subscribe(onNext: {value in
-                self.text = value
-                if let lineHeight = self.lineHeight {
-                    _ = self.lineHeight(lineHeight)
+                if let font = self.font, let textColor = self.textColor, let lineHeight = self.lineHeight  {
+                    self.attributedText = {
+                        UILabel(value)
+                            .alignment(self.textAlignment)
+                            .font(font)
+                            .color(textColor)
+                            .lineHeight(lineHeight)
+                            .attributedText
+                    }()
+                } else {
+                    self.text = value
+                    if let lineHeight = self.lineHeight {
+                        self.lineHeight(lineHeight)
+                    }
                 }
             })
             .disposed(by: disposeBag)

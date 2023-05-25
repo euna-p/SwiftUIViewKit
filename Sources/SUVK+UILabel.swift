@@ -13,7 +13,7 @@ extension UILabel {
         self.text = text
     }
     
-    public convenience init(attributed text: NSAttributedString) {
+    public convenience init(attributed text: NSAttributedString?) {
         self.init(frame: .zero)
         self.attributedText = text
     }
@@ -108,6 +108,9 @@ extension UILabel {
     private func getAttriburedText() -> NSMutableAttributedString {
         if let value = self.attributedText {
             return NSMutableAttributedString(attributedString: value)
+        } else if let text = self.text, let font = self.font, let color = self.textColor,
+                  let value = UILabel(text).font(font).color(color).attributedText {
+            return NSMutableAttributedString(attributedString: value)
         } else {
             return NSMutableAttributedString(string: self.text ?? "")
         }
@@ -133,16 +136,25 @@ extension UILabel {
 }
 
 extension UILabel {
-    private struct AssociatedKeys {
-        static var lineHeight = "lineHeight"
+    private struct LineHeightStore {
+        static var key = "lineHeight"
+        static var caches: [UILabel: CGFloat] = [:]
     }
     
     public var lineHeight: CGFloat? {
         get {
-            return objc_getAssociatedObject(self, &AssociatedKeys.lineHeight) as? CGFloat
+            if #available(iOS 13.0, *) {
+                return objc_getAssociatedObject(self, &LineHeightStore.key) as? CGFloat
+            } else {
+                return LineHeightStore.caches[self]
+            }
         }
         set {
-            objc_setAssociatedObject(self, &AssociatedKeys.lineHeight, newValue, .OBJC_ASSOCIATION_RETAIN)
+            if #available(iOS 13.0, *) {
+                objc_setAssociatedObject(self, &LineHeightStore.key, newValue, .OBJC_ASSOCIATION_RETAIN)
+            } else {
+                LineHeightStore.caches[self] = newValue
+            }
             if let newValue = newValue {
                 self.lineHeight(newValue)
             }
@@ -153,30 +165,32 @@ extension UILabel {
     public func lineHeight(_ value: CGFloat) -> Self {
         guard let font = self.font else { return self }
         
-        let attributedText = self.getAttriburedText()
-        let style = self.getStyle()
-        
-        style.alignment         = self.textAlignment
-        style.maximumLineHeight = value
-        style.minimumLineHeight = value
-        style.lineBreakMode     = self.lineBreakMode
-        
-        let offset: CGFloat = {
-            if #available(iOS 16.0, *) {
-                return 0.5
-            } else {
-                return 0.25
-            }
-        }()
-        let attributes: [NSAttributedString.Key: Any] = [.paragraphStyle: style,
-                                                         .baselineOffset: (value - font.lineHeight) * offset]
-        
-        let range = NSRange(location: 0, length: attributedText.length)
-        attributedText.addAttributes(attributes, range: range)
-        self.attributedText = attributedText
-        
         if self.lineHeight != value {
             self.lineHeight = value
+        } else {
+            let attributedText = self.getAttriburedText()
+            let style = self.getStyle()
+            style.alignment         = self.textAlignment
+            style.maximumLineHeight = value
+            style.minimumLineHeight = value
+            style.lineBreakMode     = self.lineBreakMode
+            
+            let offset: CGFloat = {
+                if #available(iOS 16.0, *) {
+                    return 0.5
+                } else {
+                    return 0.25
+                }
+            }()
+            let attributes: [NSAttributedString.Key: Any] = [.paragraphStyle: style,
+                                                             .baselineOffset: (value - font.lineHeight) * offset]
+            
+            let range = NSRange(location: 0, length: attributedText.length)
+            attributes.forEach {
+                attributedText.removeAttribute($0.key, range: range)
+                attributedText.addAttribute($0.key, value: $0.value, range: range)
+            }
+            self.attributedText = attributedText
         }
         
         return self
