@@ -10,6 +10,7 @@ import UIKit
 open class UIZStackView: UIView {
     public enum Alignment {
         case fill
+        case topFill, leftFill, rightFill, bottomFill
         case topLeft, top, topRight
         case left, center, right
         case bottomLeft, bottom, bottomRight
@@ -56,6 +57,18 @@ extension UIZStackView {
             switch self.alignment {
             case .fill:
                 $0.edges.equalToSuperview()
+            case .topFill:
+                $0.top.leading.right.equalToSuperview()
+                $0.bottom.lessThanOrEqualToSuperview()
+            case .leftFill:
+                $0.top.leading.bottom.equalToSuperview()
+                $0.trailing.lessThanOrEqualToSuperview()
+            case .rightFill:
+                $0.top.trailing.bottom.equalToSuperview()
+                $0.leading.greaterThanOrEqualToSuperview()
+            case .bottomFill:
+                $0.top.leading.trailing.equalToSuperview()
+                $0.leading.greaterThanOrEqualToSuperview()
             case .topLeft:
                 $0.top.leading.equalToSuperview()
                 $0.trailing.bottom.lessThanOrEqualToSuperview()
