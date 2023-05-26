@@ -77,12 +77,12 @@ class SecondView: SwiftUIView {
         UIVStackView {
             UIImageView(named: "11213734")
                 .contentMode(.scaleAspectFit)
-                .onResize({
+                .onResize {
                     $0.layer.cornerRadius  = $1.width / 2.0
                     $0.layer.masksToBounds = true
                     $0.layer.borderColor   = UIColor.magenta.cgColor
                     $0.layer.borderWidth   = 3.0
-                }, by: self.disposeBag)
+                }
                 .priority(.required)
                 .frame(maxWidth: .greatestFiniteMagnitude)
             UILabel(
@@ -102,15 +102,13 @@ class SecondView: SwiftUIView {
                     self.viewModel.map({ $0.list }),
                     self.selectedIdx.map({ $0 ?? 0 })
                 )
-                .map({ String(format: "Your selected: idx=%d, element=\"%@\"", $1, $0[$1]) }),
-                by: self.disposeBag
+                .map { String(format: "Your selected: idx=%d, element=\"%@\"", $1, $0[$1]) }
             )
             .font(.systemFont(ofSize: 14.0, weight: .regular))
             .alignment(.center)
             .lineHeight(20.0)
-            .hidden(self.selectedIdx.map({ $0 == nil }), by: self.disposeBag)
-            UILabel(self.scrollPosition.map({ String(format: "Scolled x=%.1f y=%.1f", $0.x, $0.y) }),
-                    by: self.disposeBag)
+            .hidden(self.selectedIdx.map { $0 == nil })
+            UILabel(self.scrollPosition.map { String(format: "Scolled x=%.1f y=%.1f", $0.x, $0.y) })
             .font(.systemFont(ofSize: 12.0, weight: .thin))
             .alignment(.center)
             .lineHeight(14.0)

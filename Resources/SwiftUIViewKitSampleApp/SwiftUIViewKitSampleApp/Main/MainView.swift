@@ -51,7 +51,7 @@ class MainView: SwiftUIView {
                     .distribution(.equalSpacing)
                     .color(.lightGray)
                     
-                    Subscriber(self.isTextFieldFocused, by: self.disposeBag) {
+                    Subscriber(self.isTextFieldFocused) {
                         if $0 {
                             UILabel("Textfield is Focused!")
                         } else {
@@ -73,8 +73,8 @@ extension MainView {
         UIVStackView(spacing: 24.0) {
             UIImageView(named: "11213734")
                 .contentMode(.scaleAspectFit)
-                .onResize(to: self.topIconSize, by: self.disposeBag)
-                .corner(radius: self.topIconSize.map({ $0.width / 2.0 }), by: self.disposeBag)
+                .onResize(to: self.topIconSize)
+                .corner(radius: self.topIconSize.map { $0.width / 2.0 })
                 .border(width: 3.0)
                 .border(color: .magenta)
                 .priority(.required)
@@ -102,15 +102,14 @@ extension MainView {
                 UILabel(
                     self.viewModel
                         .map { $0.userText }
-                        .map { $0.isEmpty ? "Nothing..." : $0 },
-                    by: self.disposeBag
+                        .map { $0.isEmpty ? "Nothing..." : $0 }
                 )
                 .font(.systemFont(ofSize: 14.0, weight: .thin))
                 .lineLimit(0)
                 .lineHeight(20.0)
-                .color(self.viewModel.map({ $0.userText.isEmpty ? .gray : .magenta }), by: disposeBag)
+                .color(self.viewModel.map { $0.userText.isEmpty ? .gray : .magenta })
             }
-            UILabel(self.currentText.map({ String(format: "Realtime Text = \"%@\"", $0) }), by: self.disposeBag)
+            UILabel(self.currentText.map({ String(format: "Realtime Text = \"%@\"", $0) }))
                 .font(.systemFont(ofSize: 12.0, weight: .thin))
                 .lineLimit(0)
                 .lineHeight(14.0)
@@ -118,29 +117,26 @@ extension MainView {
                 .color(.gray)
             UIHStackView(spacing: 8.0) {
                 UITextField()
-                    .bind(to: self.currentText, by: self.disposeBag)
+                    .bind(to: self.currentText)
                     .configuration {(tf: UITextField) in
                         tf.placeholder = "Input some text and click button!"
                     }
                     .background(
                         UIDivider()
-                            .color(self.isTextFieldFocused.map({ $0 ? .cyan : .lightGray }),
-                                   by: self.disposeBag)
+                            .color(self.isTextFieldFocused.map { $0 ? .cyan : .lightGray })
                             .frame(maxHeight: .greatestFiniteMagnitude,
                                    verticalAlignment: .bottom)
                     )
-                    .onTapGesture(by: self.disposeBag) {gesture in
+                    .onTapGesture {gesture in
                         gesture.view?.becomeFirstResponder()
                     }
                     .addTarget(
-                        by: self.disposeBag,
                         for: .editingDidBegin,
                         action: {[unowned self] in
                             self.isTextFieldFocused.accept(true)
                         }
                     )
                     .addTarget(
-                        by: self.disposeBag,
                         for: [.editingDidEnd, .editingDidEndOnExit],
                         action: {[unowned self] in
                             self.isTextFieldFocused.accept(false)
@@ -148,7 +144,7 @@ extension MainView {
                     )
                     .priority(.defaultHigh)
                 self.button(text: "CLICK!")
-                    .onTapGesture(by: self.disposeBag) {[unowned self] in
+                    .onTapGesture {[unowned self] in
                         self.endEditing(false)
                         self.viewModel.unwrappedValue.userText = self.currentText.value
                     }
@@ -163,21 +159,15 @@ extension MainView {
                     .font(.systemFont(ofSize: 16.0, weight: .bold))
                 UIHStackView(alignment: .center, spacing: 8.0) {
                     self.button(text: "-")
-                        .onTapGesture(by: self.disposeBag) {[unowned self] in
+                        .onTapGesture {[unowned self] in
                             self.viewModel.decreaseCount()
                         }
-                    UILabel(self.viewModel
-                                .map { String(format: "%lld", $0.clickedCount) }
-                                .distinctUntilChanged(),
-                            by: self.disposeBag)
+                    UILabel(self.viewModel.map { String(format: "%lld", $0.clickedCount) })
                         .font(.systemFont(ofSize: 14.0, weight: .thin))
                         .alignment(.center)
-                        .color(self.viewModel
-                                   .map { $0.clickedCount < 0 ? .red : .green }
-                                   .distinctUntilChanged(),
-                               by: self.disposeBag)
+                        .color(self.viewModel.map { $0.clickedCount < 0 ? .red : .green })
                     self.button(text: "+")
-                        .onTapGesture(by: self.disposeBag) {[unowned self] in
+                        .onTapGesture {[unowned self] in
                             self.viewModel.increaseCount()
                         }
                 }
@@ -188,7 +178,7 @@ extension MainView {
     
     private var navigateToSecondViewButton: UIView {
         self.button(text: "Move to SecondView!")
-            .onTapGesture(by: self.disposeBag, publish: self.didTappedNavigateToSecondView)
+            .onTapGesture(publish: self.didTappedNavigateToSecondView)
     }
     
     private func button(text: String) -> UIView {
