@@ -283,6 +283,7 @@ extension UIControl {
         self.addTarget(for: controlEvents, action: action)
     }
     
+    @discardableResult
     public func addTarget(for controlEvents: UIControl.Event, action: @escaping (()->Void)) -> Self {
         self.rx.controlEvent(controlEvents)
             .subscribe(onNext: action)
