@@ -67,8 +67,8 @@ extension UIZStackView {
                 $0.top.trailing.bottom.equalToSuperview()
                 $0.leading.greaterThanOrEqualToSuperview()
             case .bottomFill:
-                $0.top.leading.trailing.equalToSuperview()
-                $0.leading.greaterThanOrEqualToSuperview()
+                $0.leading.trailing.bottom.equalToSuperview()
+                $0.top.greaterThanOrEqualToSuperview()
             case .topLeft:
                 $0.top.leading.equalToSuperview()
                 $0.trailing.bottom.lessThanOrEqualToSuperview()
