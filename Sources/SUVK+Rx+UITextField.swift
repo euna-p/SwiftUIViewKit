@@ -19,8 +19,14 @@ extension UITextField {
 import RxRelay
 
 extension UITextField {
+    @available(*, deprecated, message: "Remove `by: DisposeBag` in parameter.")
     @discardableResult
     public func bind(to observer: BehaviorRelay<String>, by disposeBag: DisposeBag) -> Self {
+        self.bind(to: observer)
+    }
+    
+    @discardableResult
+    public func bind(to observer: BehaviorRelay<String>) -> Self {
         self.rx.text
             .orEmpty
             .distinctUntilChanged()
@@ -33,7 +39,7 @@ extension UITextField {
             .subscribe(onNext: {[weak self] in
                 self?.text = $0
             })
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
         
         return self
     }

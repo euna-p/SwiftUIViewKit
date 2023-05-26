@@ -13,27 +13,14 @@ import RxCocoa
 
 open class Subscriber: UIGroupView {
     public typealias Block = ()->[UIView]
-    
-    private let disposeBag: DisposeBag
-    
-    internal init(by disposeBag: DisposeBag) {
-        self.disposeBag = disposeBag
-        super.init(frame: .zero)
-    }
-    
-    public required init(coder: NSCoder) {
-        self.disposeBag = DisposeBag()
-        super.init(coder: coder)
-    }
 }
 
 extension Subscriber {
     public convenience init<T>(_ observer: Observable<T>,
                                at when: SwiftUIView.SubscribeAt = .always,
-                               by disposeBag: DisposeBag,
                                @ViewGroup onNext perform: @escaping ((T)->[UIView]),
                                file: String = #file, function: String = #function, lineNumber: Int = #line) {
-        self.init(by: disposeBag)
+        self.init()
         
         var observer = observer
         switch when {
@@ -74,16 +61,31 @@ extension Subscriber {
             })
             .disposed(by: self.disposeBag)
     }
-    
+}
+
+#if canImport(RxRelay)
+import RxRelay
+
+extension Subscriber {
+    @available(*, deprecated, message: "Remove `by: DisposeBag` in parameter.")
     public convenience init<T>(_ observer: BehaviorRelay<T>,
                                at when: SwiftUIView.SubscribeAt = .always,
                                by disposeBag: DisposeBag,
                                @ViewGroup onNext perform: @escaping ((T)->[UIView]),
                                file: String = #file, function: String = #function, lineNumber: Int = #line) {
-        self.init(observer.asObservable(), at: when, by: disposeBag, onNext: perform,
+        self.init(observer, at: when, onNext: perform,
+                  file: file, function: function, lineNumber: lineNumber)
+    }
+        
+    public convenience init<T>(_ observer: BehaviorRelay<T>,
+                               at when: SwiftUIView.SubscribeAt = .always,
+                               @ViewGroup onNext perform: @escaping ((T)->[UIView]),
+                               file: String = #file, function: String = #function, lineNumber: Int = #line) {
+        self.init(observer.asObservable(), at: when, onNext: perform,
                   file: file, function: function, lineNumber: lineNumber)
     }
 }
+#endif
 #endif
 
 extension Equatable {

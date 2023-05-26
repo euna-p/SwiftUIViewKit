@@ -138,23 +138,14 @@ extension UILabel {
 extension UILabel {
     private struct LineHeightStore {
         static var key = "lineHeight"
-        static var caches: [UILabel: CGFloat] = [:]
     }
     
     public var lineHeight: CGFloat? {
         get {
-            if #available(iOS 13.0, *) {
-                return objc_getAssociatedObject(self, &LineHeightStore.key) as? CGFloat
-            } else {
-                return LineHeightStore.caches[self]
-            }
+            return objc_getAssociatedObject(self, &LineHeightStore.key) as? CGFloat
         }
         set {
-            if #available(iOS 13.0, *) {
-                objc_setAssociatedObject(self, &LineHeightStore.key, newValue, .OBJC_ASSOCIATION_RETAIN)
-            } else {
-                LineHeightStore.caches[self] = newValue
-            }
+            objc_setAssociatedObject(self, &LineHeightStore.key, newValue, .OBJC_ASSOCIATION_RETAIN)
             if let newValue = newValue {
                 self.lineHeight(newValue)
             }

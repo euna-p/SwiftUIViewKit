@@ -12,8 +12,35 @@ import RxSwift
 import RxCocoa
 
 extension UIScrollView {
-    public func scroll(to observable: Observable<CGPoint>, by disposeBag: DisposeBag) -> Self {
-        observable
+    @discardableResult
+    public func scroll(to observer: Observable<CGPoint>) -> Self {
+        self.scroll(to: observer, by: self.disposeBag)
+    }
+    
+    @discardableResult
+    public func contentOffset<T: UIScrollView>(onNext block: @escaping ((T, CGPoint)->Void),
+                                               on scheduler: ImmediateSchedulerType = MainScheduler.instance)
+    -> Self {
+        self.contentOffset(onNext: block, on: scheduler, by: self.disposeBag)
+    }
+    
+    @discardableResult
+    public func didEndScroll<T: UIScrollView>(onNext block: @escaping ((T)->Void),
+                                              on scheduler: ImmediateSchedulerType = MainScheduler.instance)
+    -> Self {
+        self.didEndScroll(onNext: block, on: scheduler, by: self.disposeBag)
+    }
+    
+    @discardableResult
+    public func didScrollLast<T: UIScrollView>(onNext block: @escaping ((T)->Void),
+                                               on scheduler: ImmediateSchedulerType = MainScheduler.instance)
+    -> Self {
+        self.didScrollLast(onNext: block, on: scheduler, by: self.disposeBag)
+    }
+    
+    @discardableResult
+    public func scroll(to observer: Observable<CGPoint>, by disposeBag: DisposeBag) -> Self {
+        observer
             .bind(to: self.rx.contentOffset)
             .disposed(by: disposeBag)
         return self
@@ -21,7 +48,7 @@ extension UIScrollView {
     
     @discardableResult
     public func contentOffset<T: UIScrollView>(onNext block: @escaping ((T, CGPoint)->Void),
-                                               on scheduler: ImmediateSchedulerType = MainScheduler.asyncInstance,
+                                               on scheduler: ImmediateSchedulerType = MainScheduler.instance,
                                                by disposeBag: DisposeBag)
     -> Self {
         if let view = self as? T {
@@ -38,7 +65,7 @@ extension UIScrollView {
     
     @discardableResult
     public func didEndScroll<T: UIScrollView>(onNext block: @escaping ((T)->Void),
-                                              on scheduler: ImmediateSchedulerType = MainScheduler.asyncInstance,
+                                              on scheduler: ImmediateSchedulerType = MainScheduler.instance,
                                               by disposeBag: DisposeBag)
     -> Self {
         if let view = self as? T {
@@ -54,7 +81,7 @@ extension UIScrollView {
     
     @discardableResult
     public func didScrollLast<T: UIScrollView>(onNext block: @escaping ((T)->Void),
-                                               on scheduler: ImmediateSchedulerType = MainScheduler.asyncInstance,
+                                               on scheduler: ImmediateSchedulerType = MainScheduler.instance,
                                                by disposeBag: DisposeBag)
     -> Self {
         if let view = self as? T {
@@ -73,21 +100,35 @@ extension UIScrollView {
 import RxRelay
 
 extension UIScrollView {
+    @available(*, deprecated, message: "Remove `by: DisposeBag` in parameter.")
+    @discardableResult
     public func scroll(bind behaviorRelay: BehaviorRelay<CGPoint>, by disposeBag: DisposeBag) -> Self {
+        self.scroll(bind: behaviorRelay)
+    }
+    
+    @available(*, deprecated, message: "Remove `by: DisposeBag` in parameter.")
+    @discardableResult
+    public func scroll(to publishRelay: PublishRelay<CGPoint>, by disposeBag: DisposeBag) -> Self {
+        self.scroll(to: publishRelay)
+    }
+    
+    @discardableResult
+    public func scroll(bind behaviorRelay: BehaviorRelay<CGPoint>) -> Self {
         behaviorRelay
             .bind(to: self.rx.contentOffset)
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
         self.rx.contentOffset
             .filter { $0.x != behaviorRelay.value.x || $0.y != behaviorRelay.value.y }
             .bind(to: behaviorRelay)
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
         return self
     }
     
-    public func scroll(to publishRelay: PublishRelay<CGPoint>, by disposeBag: DisposeBag) -> Self {
+    @discardableResult
+        public func scroll(to publishRelay: PublishRelay<CGPoint>) -> Self {
         publishRelay
             .bind(to: self.rx.contentOffset)
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
         return self
     }
 }
