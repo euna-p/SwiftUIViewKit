@@ -93,12 +93,6 @@ extension UILabel {
 extension UILabel {
     @available(*, deprecated, message: "Remove `by: DisposeBag` in parameter.")
     @discardableResult
-    public func underLine(by disposeBag: DisposeBag) -> Self {
-        self.underLine()
-    }
-    
-    @available(*, deprecated, message: "Remove `by: DisposeBag` in parameter.")
-    @discardableResult
     public func underLine(_ flag: Observable<Bool>, by disposeBag: DisposeBag) -> Self {
         self.underLine(flag)
     }
