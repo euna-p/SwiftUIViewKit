@@ -116,23 +116,17 @@ extension UILabel {
     }
     
     @discardableResult
-    public func underLine() -> Self {
-        self.rx.observe(String.self, "text")
-            .map {_ in }
-            .subscribe(onNext: {[weak self] in
-                self?.underLine()
-            })
-            .disposed(by: self.disposeBag)
-        return self
-    }
-    
-    @discardableResult
     public func underLine(_ flag: Observable<Bool>) -> Self {
-        flag.distinctUntilChanged()
-            .subscribe(onNext: {[weak self] in
-                self?.underLine($0)
-            })
-            .disposed(by: self.disposeBag)
+        Observable.combineLatest(
+            flag,
+            self.rx.observe(String.self, "text")
+        )
+        .map {(flag, _) in return flag  }
+        .distinctUntilChanged()
+        .subscribe(onNext: {[weak self] in
+            self?.underLine($0)
+        })
+        .disposed(by: self.disposeBag)
         return self
     }
     
