@@ -506,7 +506,7 @@ extension UIView {
 
 extension UIView {
     public static func spacer() -> UIView {
-        let view = UIView(frame: .zero)
+        let view = UIView(frame: .zero).priority(.defaultLow)
         view.snp.makeConstraints {
             $0.width.height.greaterThanOrEqualTo(0.0)
         }
