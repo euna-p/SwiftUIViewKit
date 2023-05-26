@@ -84,7 +84,7 @@ extension UILabel {
 
 extension UILabel {
     @discardableResult
-    public func underLine(_ flag: Bool = true) -> Self {
+    public func underLine(_ flag: Bool) -> Self {
         let attributedText: NSMutableAttributedString = {
             if let value = self.attributedText { return NSMutableAttributedString(attributedString: value) }
             return NSMutableAttributedString(string: self.text ?? "")
