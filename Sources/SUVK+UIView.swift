@@ -157,7 +157,7 @@ extension UIView {
 
 extension UIView {
     public func background(_ color: UIColor) -> Self {
-        self.layer.backgroundColor = color.cgColor
+        self.backgroundColor = color
         return self
     }
     
