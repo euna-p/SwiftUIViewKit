@@ -1,11 +1,11 @@
 
 # SwiftUIViewKit
 
-Can more **EASILY** made UI.
+조금 더 **손쉽게** UI를 작성하도록 돕는 프레임워크 입니다.
 
 ![](https://raw.githubusercontent.com/fallenlonelie/SwiftUIViewKit/main/Resources/preview.png)
 
-## Make _UIView_ class with **SwiftUIViewKit**.
+## _UIView_ 클래스를 **SwiftUIViewKit**을 사용해 작성 해보세요.
 
 ```
 import UIKit
@@ -23,7 +23,7 @@ class MyView: SwiftUIView {
     }
 }
 ```
-> By default, layouts can be configured with Vertical or Horizontal and Linear using *UIStackView*.
+> `UIVstackView`, `UIHStackView` 를 사용하여 수직 또는 수평의 선형 스택에 뷰 구성을 할 수 있습니다.
 ---
 ```
 UIVStackView(alignment: .center, spacing: 12.0) {
@@ -31,14 +31,14 @@ UIVStackView(alignment: .center, spacing: 12.0) {
 }
 .distribution(.fillEqually)
 ```
-> At this time, you can obtain the layout you want by utilizing the *.spacing*, *.alignment*, and *.distribution* of *UIStrackView*.
+> 스택 안에 들어갈 SubView 구성에 `UIStrackView`가 제공하는 `.spacing`, `.alignment`, 또는 `.distribution` 옵션을 적용할 수 있습니다.
 ---
 ```
 UIView.spacer()
     .frame(maxWidth: .greatestFiniteMagnitude, horizontalAlignment: .right)
     .padding(.top, 12.0)
 ```
-> All UIViews (including inherited children) can be sized through *.frame*, or *.padding* allows you to specify margins.
+> 모든 `UIView`(상속된 자식 포함)는 `.frame`을 통해 크기를 조정할 수 있습니다. 또는 `.padding`을 사용하면 여백을 지정할 수 있습니다.
 ---
 ```
 UIVScrollView {
@@ -50,7 +50,7 @@ UIHScrollView {
     /*Any UIView*/
 )
 ```
-> *UIScrollView* is also easy to use.
+> `UIVScrollView` 또는 `UIHScrollView` 로 감싼 뷰는 스크롤이 가능해 집니다.
 ---
 ```
 UILabel(
@@ -59,7 +59,7 @@ UILabel(
     + UILabel("Small").font(.systemFont(ofSize: 10.0, weight: .regular))
 )
 ```
-> The `+` operator in *UILabel* makes it easy to formatted text.
+> `UILabel`에 `+` 연산자를 함께 사용하면 손쉽게 서식있는 텍스트를 작성할 수 있습니다.
 ---
 ```
 UIVScrollView {
@@ -68,7 +68,7 @@ UIVScrollView {
 )
 .color(.cyan)
 ```
-> *.color* finds all the *UIView*s contained within, including the corresponding *UIView*, and applies the color value.
+> `.color`는 해당 `UIView`를 포함하여 내부에 포함된 모든 `UIView`를 찾고 색상 값을 적용합니다.
 ---
 ```
 private let disposeBag = DisposeBag()
@@ -84,19 +84,19 @@ var body: UIView {
     .color(self.color)
 }
 ```
-> Use Rx then You can easily made responsive UI.
+> Rx를 사용하면 반응형 UI를 쉽게 만들 수 있습니다.
 ---
 ```
 someView.subscribe(someObservable) {view, element in
     /* blah */
 }
 ```
-> Similarly, you can customize the behavior after receiving the *Observable*.
+> `.subscribe`를 통해 `Observable` 및 `Relay`를 수신한 후 뷰의 모습을 바꿔줄 수 있습니다.
 ---
 ```
 someView.configure {view in
     /* blah */
 }
 ```
-> Features not yet supported can be customized using the *.configure* in UIView.
+> 아직 지원되지 않는 기능은 `UIView`의 `.configure`를 사용하여 사용자 정의할 수 있습니다.
 ---
