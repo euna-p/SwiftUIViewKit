@@ -28,10 +28,6 @@ open class UIHScrollView: UIScrollView {
         subview.didMoveToSuperview()
         subview.snp.makeConstraints {
             $0.top.leading.trailing.bottom.equalToSuperview().priority(.required)
-            $0.width.equalToSuperview().priority(.required)
-        }
-        subview.snp.makeConstraints {
-            $0.top.leading.trailing.bottom.equalToSuperview().priority(.required)
             $0.height.equalToSuperview().priority(.required)
         }
     }
