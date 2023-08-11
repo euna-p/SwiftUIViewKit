@@ -60,6 +60,26 @@ extension UIStackView {
         return self.rearrange()
     }
     
+    public func ratios(_ values: CGFloat?...) -> Self {
+        self.onResize {view, _ in
+            guard let view = view as? UIStackView else { return }
+            view.arrangedSubviews
+                .enumerated()
+                .forEach {offset, element in
+                    guard (values.count - 1) >= offset,
+                          let ratio = values[offset]
+                    else { return }
+                    element.snp.remakeConstraints {
+                        if view.axis == .horizontal {
+                            $0.width.equalToSuperview().multipliedBy(ratio)
+                        } else {
+                            $0.height.equalToSuperview().multipliedBy(ratio)
+                        }
+                    }
+                }
+        }
+    }
+    
     private func rearrange() -> Self {
         self.subviews.forEach {
             $0.removeFromSuperview()
