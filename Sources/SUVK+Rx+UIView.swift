@@ -132,6 +132,16 @@ extension UIView {
             .disposed(by: self.disposeBag)
         return self
     }
+    
+    public func background(_ color: Observable<UIColor>) -> Self {
+        color
+            .distinctUntilChanged()
+            .subscribe(onNext: {[weak self] in
+                self?.backgroundColor = $0
+            })
+            .disposed(by: self.disposeBag)
+        return self
+    }
 }
 
 extension UIView {
@@ -324,6 +334,11 @@ extension UIView {
         self.color(color.asObservable(), by: disposeBag)
     }
     
+    @discardableResult
+    public func color(_ color: BehaviorRelay<UIColor>) -> Self {
+        self.color(color.asObservable())
+    }
+    
     @available(*, deprecated, message: "Remove `by: DisposeBag` in parameter.")
     @discardableResult
     public func hidden(_ flag: BehaviorRelay<Bool>, by disposeBag: DisposeBag) -> Self {
@@ -331,13 +346,18 @@ extension UIView {
     }
     
     @discardableResult
-    public func color(_ color: BehaviorRelay<UIColor>) -> Self {
-        self.color(color.asObservable())
-    }
-    
-    @discardableResult
     public func hidden(_ flag: BehaviorRelay<Bool>) -> Self {
         self.hidden(flag.asObservable())
+    }
+    
+    public func background(_ color: BehaviorRelay<UIColor>) -> Self {
+        color
+            .distinctUntilChanged()
+            .subscribe(onNext: {[weak self] in
+                self?.backgroundColor = $0
+            })
+            .disposed(by: self.disposeBag)
+        return self
     }
 }
 
@@ -512,3 +532,4 @@ extension UIControl {
 }
 #endif
 #endif
+
