@@ -179,6 +179,27 @@ extension UIView {
     }
     
     @discardableResult
+    public func onResize(_ perform: @escaping ()->Void) -> Self {
+        self.onResize {_, _ in
+            perform()
+        }
+    }
+    
+    @discardableResult
+    public func onResize(_ perform: @escaping (CGSize)->Void) -> Self {
+        self.onResize {_, size in
+            perform(size)
+        }
+    }
+    
+    @discardableResult
+    public func onResize<T: UIView>(_ perform: @escaping (T)->Void) -> Self {
+        self.onResize {(view: T, _) in
+            perform(view)
+        }
+    }
+    
+    @discardableResult
     public func onResize<T: UIView>(_ perform: @escaping (T, CGSize)->Void) -> Self {
         if let t = self as? T {
             self.rx.observe(CGRect.self, #keyPath(UIView.bounds))
